@@ -1,0 +1,19 @@
+{
+//  "extends": "@stoplight/scripts/tsconfig.json",
+  "include": ["./cypress"],
+  "compilerOptions": {
+    "esModuleInterop": true,
+      "target": "ES6",
+    "baseUrl": "./packages",
+    "lib": ["es2021", "dom"],
+    "paths": {
+      "@stoplight/elements": ["./elements/src"],
+      "@stoplight/elements/*": ["./elements/src/*"],
+      "@stoplight/elements-dev-portal": ["./elements-dev-portal/src"],
+      "@stoplight/elements-dev-portal/*": ["./elements-dev-portal/src/*"],
+      "@stoplight/elements-core": ["./elements-core/src"],
+      "@stoplight/elements-core/*": ["./elements-core/src/*"]
+    }
+  },
+  "moduleResolution": "node"
+}
