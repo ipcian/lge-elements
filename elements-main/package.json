@@ -1,12 +1,14 @@
 {
-  "name": "root",
+  "name": "lge-elements",
+  "version": "0.0.1",
+  "main": "packages/elements/src/index.ts",
   "private": true,
   "homepage": "https://github.com/stoplightio/elements",
   "bugs": "https://github.com/stoplightio/elements/issues",
-  "author": "Stoplight <support@stoplight.io>",
+  "author": "engistech <jsyoon@engistech.com>, Stoplight <support@stoplight.io>",
   "repository": {
     "type": "git",
-    "url": "https://github.com/stoplightio/elements"
+    "url": "https://github.com/ipcian/lge-elements"
   },
   "license": "Apache-2.0",
   "workspaces": [
@@ -125,6 +127,6 @@
     "extends": [
       "@commitlint/config-conventional"
     ]
-  },
-  "version": "0.0.3"
+  }
+
 }
