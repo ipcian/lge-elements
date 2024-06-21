@@ -24,3 +24,4 @@ yarn-error.log*
 /.idea/inspectionProfiles/Project_Default.xml
 /.idea/vcs.xml
 /yarn.lock
+/src/lge-elements/node_modules/
