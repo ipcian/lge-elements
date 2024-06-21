@@ -225,7 +225,7 @@ export const APIImpl: React.FC<APIProps> = props => {
   );
 };
 
-export const API = flow(
+export const API:React.FC<APIProps> = flow(
   withRouter,
   withStyles,
   withPersistenceBoundary,
