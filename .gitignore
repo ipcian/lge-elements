@@ -25,3 +25,7 @@ yarn-error.log*
 /.idea/vcs.xml
 /yarn.lock
 /src/lge-elements/node_modules/
+/packages/elements/node_modules/
+/packages/elements-core/node_modules/
+/packages/elements-dev-portal/node_modules/
+/demo/node_modules/

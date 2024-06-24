@@ -1,5 +1,5 @@
 {
-  "name": "@stoplight/elements-demo",
+  "name": "@lge/elements-demo",
   "version": "7.0.1",
   "private": true,
   "scripts": {
@@ -16,7 +16,7 @@
     "react": "16.14.0",
     "react-dom": "16.14.0",
     "react-github-btn": "1.2.2",
-    "react-router-dom": "6.0.0-beta.0"
+    "react-router-dom": "6.23.1"
   },
   "devDependencies": {
     "@types/jest": "^26.0.22",
