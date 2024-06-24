@@ -1,26 +1,17 @@
 {
+  "extends": "@stoplight/scripts/tsconfig.json",
+  "include": ["./cypress"],
   "compilerOptions": {
-    "target": "es5",
-    "lib": [
-      "dom",
-      "dom.iterable",
-      "esnext"
-    ],
-    "allowJs": true,
-    "skipLibCheck": true,
     "esModuleInterop": true,
-    "allowSyntheticDefaultImports": true,
-    "strict": true,
-    "forceConsistentCasingInFileNames": true,
-    "noFallthroughCasesInSwitch": true,
-    "module": "esnext",
-    "moduleResolution": "node",
-    "resolveJsonModule": true,
-    "isolatedModules": true,
-    "noEmit": true,
-    "jsx": "react-jsx"
-  },
-  "include": [
-    "src"
-  ]
+    "baseUrl": "./packages",
+    "lib": ["es2021", "dom"],
+    "paths": {
+      "@stoplight/elements": ["./elements/src"],
+      "@stoplight/elements/*": ["./elements/src/*"],
+      "@stoplight/elements-dev-portal": ["./elements-dev-portal/src"],
+      "@stoplight/elements-dev-portal/*": ["./elements-dev-portal/src/*"],
+      "@stoplight/elements-core": ["./elements-core/src"],
+      "@stoplight/elements-core/*": ["./elements-core/src/*"]
+    }
+  }
 }
