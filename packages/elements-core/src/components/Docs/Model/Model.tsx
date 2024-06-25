@@ -17,7 +17,7 @@ import { DocsComponentProps } from '..';
 import { DeprecatedBadge, InternalBadge } from '../HttpOperation/Badges';
 import { ExportButton } from '../HttpService/ExportButton';
 import { NodeVendorExtensions } from '../NodeVendorExtensions';
-import { TwoColumnLayout } from '../TwoColumnLayout';
+import {TwoColumnLayoutCustom} from "@stoplight/elements-core/components/Docs/TwoColumnLayoutCustom";
 
 export type ModelProps = DocsComponentProps<JSONSchema7>;
 
@@ -94,7 +94,7 @@ const ModelComponent: React.FC<ModelProps> = ({
   );
 
   return (
-    <TwoColumnLayout
+    <TwoColumnLayoutCustom
       ref={layoutRef}
       className={cn('Model', className)}
       header={header}

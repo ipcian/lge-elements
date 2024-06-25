@@ -15,11 +15,11 @@ import { MarkdownViewer } from '../../MarkdownViewer';
 import { chosenServerAtom, TryItWithRequestSamples } from '../../TryIt';
 import { DocsComponentProps } from '..';
 import { NodeVendorExtensions } from '../NodeVendorExtensions';
-import { TwoColumnLayout } from '../TwoColumnLayout';
 import { DeprecatedBadge, InternalBadge } from './Badges';
 import { Callbacks } from './Callbacks';
 import { Request } from './Request';
 import { Responses } from './Responses';
+import {TwoColumnLayoutCustom} from "@stoplight/elements-core/components/Docs/TwoColumnLayoutCustom";
 
 export type HttpOperationProps = DocsComponentProps<IHttpEndpointOperation>;
 
@@ -109,7 +109,7 @@ const HttpOperationComponent = React.memo<HttpOperationProps>(
     );
 
     return (
-      <TwoColumnLayout
+      <TwoColumnLayoutCustom
         ref={layoutRef}
         className={cn('HttpOperation', className)}
         header={header}
