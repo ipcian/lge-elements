@@ -16,8 +16,7 @@ export default function ElementsAPI() {
 
   return (
     <Box flex={1} overflowY={layout !== 'stacked' ? 'hidden' : undefined}>
-        <API apiDescriptionUrl={specUrlWithProxy} router="hash" layout={layout} />
-
+        <API apiDescriptionUrl={specUrlWithProxy} router="history" layout={layout} />
     </Box>
   );
 };
