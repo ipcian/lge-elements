@@ -6,6 +6,7 @@
     "src/web-components/**",
     "**/*.css"
   ],
+  "private": "true",
   "homepage": "https://github.com/stoplightio/elements",
   "bugs": "https://github.com/stoplightio/elements/issues",
   "author": "Stoplight <support@stoplight.io>",

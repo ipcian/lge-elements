@@ -3,6 +3,7 @@
   "version": "8.3.1",
   "description": "UI components for composing beautiful developer documentation.",
   "keywords": [],
+  "private": "true",
   "sideEffects": [
     "web-components.min.js",
     "src/web-components/**",
