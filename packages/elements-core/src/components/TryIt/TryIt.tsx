@@ -72,7 +72,7 @@ export interface TryItProps {
 
 const defaultServers: IServer[] = [];
 
-export const TryIt: React.FC<TryItProps> = ({
+export function TryIt({
   httpOperation,
   mockUrl,
   onRequestChange,
@@ -80,8 +80,8 @@ export const TryIt: React.FC<TryItProps> = ({
   embeddedInMd = false,
   tryItCredentialsPolicy,
   corsProxy,
-}) => {
-  TryIt.displayName = 'TryIt';
+}:TryItProps) {
+  // TryIt.displayName = 'TryIt';
   const isDark = useThemeIsDark();
 
   const [response, setResponse] = React.useState<ResponseState | ErrorState | undefined>();

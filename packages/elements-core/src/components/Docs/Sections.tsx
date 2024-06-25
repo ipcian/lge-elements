@@ -9,9 +9,10 @@ export interface ISectionTitle {
   id?: string;
   size?: HeadingProps['size'];
   isCompact?: boolean;
+  children?: any
 }
 
-export const SectionTitle: React.FC<ISectionTitle> = ({ title, id, size = 2, isCompact = false, children }) => {
+export function SectionTitle ({ title, id, size = 2, isCompact = false, children }:ISectionTitle) {
   return (
     <Flex w="full">
       <Box py={1} pr={6} as={LinkHeading} size={size} aria-label={title} id={id || slugify(title)}>
@@ -24,7 +25,7 @@ export const SectionTitle: React.FC<ISectionTitle> = ({ title, id, size = 2, isC
   );
 };
 
-export const SectionSubtitle: React.FC<ISectionTitle> = props => {
+export function SectionSubtitle (props:ISectionTitle) {
   return <SectionTitle {...props} size={3} />;
 };
 
@@ -32,16 +33,17 @@ type SubSectionPanelProps = {
   title: React.ReactNode;
   hasContent?: boolean;
   rightComponent?: React.ReactNode;
+    children?:any
 };
 
-export const SubSectionPanel: React.FC<SubSectionPanelProps & Pick<PanelProps, 'defaultIsOpen' | 'onChange'>> = ({
+export function SubSectionPanel ({
   title,
   children,
   hasContent,
   rightComponent,
   defaultIsOpen = true,
   onChange,
-}) => {
+}:SubSectionPanelProps & Pick<PanelProps, 'defaultIsOpen' | 'onChange'>)   {
   return (
     <Panel isCollapsible={hasContent} defaultIsOpen={defaultIsOpen} onChange={onChange} appearance="outlined">
       <Panel.Titlebar fontWeight="medium" rightComponent={rightComponent}>

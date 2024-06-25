@@ -4,7 +4,7 @@ import { Dictionary } from '@stoplight/types';
 import { Request } from 'har-format';
 import { atom, useAtom } from 'jotai';
 import { cloneDeep, find, findKey } from 'lodash';
-import React, { memo, useEffect, useMemo, useState } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 
 import { persistAtom } from '../../utils/jotai/persistAtom';
 import { convertRequestToSample } from './convertRequestToSample';
@@ -54,7 +54,7 @@ const fallbackText = 'Unable to generate code example';
  *
  * The programming language can be selected by the user and is remembered across instances and remounts.
  */
-export const RequestSamples = memo<RequestSamplesProps>(({ request, embeddedInMd = false, customCodeSamples = [] }) => {
+export function RequestSamples({ request, embeddedInMd = false, customCodeSamples = [] }:RequestSamplesProps) {
   const [selectedLanguage, setSelectedLanguage] = useAtom(selectedLanguageAtom);
   const [selectedLibrary, setSelectedLibrary] = useAtom(selectedLibraryAtom);
 
@@ -243,4 +243,4 @@ export const RequestSamples = memo<RequestSamplesProps>(({ request, embeddedInMd
       </Panel.Content>
     </Panel>
   );
-});
+};

@@ -1,7 +1,7 @@
 export type TableOfContentsProps = {
   tree: TableOfContentsItem[];
   activeId: string;
-  Link: CustomLinkComponent;
+  Link: CustomLinkComponent | any;
   maxDepthOpenByDefault?: number;
   externalScrollbar?: boolean;
   isInResponsiveMode?: boolean;

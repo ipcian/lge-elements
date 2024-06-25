@@ -8,7 +8,7 @@ export interface ExportButtonProps {
   bundled: ExportMenuProps;
 }
 
-export const ExportButton: React.FC<ExportButtonProps> = ({ original, bundled }) => {
+export function ExportButton ({ original, bundled }: ExportButtonProps) {
   const menuItems = React.useMemo(() => {
     const items: MenuItems = [
       { id: 'original', title: 'Original', ...original },

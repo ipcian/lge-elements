@@ -6,7 +6,7 @@ interface LoadMoreProps {
   onClick: () => void;
 }
 
-export const LoadMore: React.FC<LoadMoreProps> = ({ loading, onClick }) => {
+export function LoadMore ({ loading, onClick }:LoadMoreProps) {
   return (
     <Flex flexDirection="col" justifyContent="center" alignItems="center" style={{ height: '400px' }}>
       <Button aria-label="load-example" onPress={onClick} appearance="minimal" loading={loading} disabled={loading}>

@@ -9,7 +9,7 @@ import { TryIt, TryItProps } from './TryIt';
 export type TryItWithRequestSamplesProps = Omit<TryItProps, 'onRequestChange'> &
   ResponseExamplesProps & { hideTryIt?: boolean };
 
-export const TryItWithRequestSamples: React.FC<TryItWithRequestSamplesProps> = ({ hideTryIt, ...props }) => {
+export function TryItWithRequestSamples({ hideTryIt, ...props }:TryItWithRequestSamplesProps) {
   const [requestData, setRequestData] = React.useState<HarRequest | undefined>();
 
   const customCodeSamples = extractCodeSamples(props.httpOperation);

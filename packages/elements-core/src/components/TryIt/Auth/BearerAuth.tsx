@@ -10,7 +10,7 @@ interface BearerAuthProps {
   value: string;
 }
 
-export const BearerAuth: React.FC<BearerAuthProps> = ({ value, onChange }) => {
+export function BearerAuth({ value, onChange }:BearerAuthProps) {
   return (
     <Panel.Content className="ParameterGrid" data-test="auth-try-it-row">
       <AuthTokenInput type="http" name="Token" value={value} onChange={onChange} />

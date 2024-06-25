@@ -36,7 +36,7 @@ const getVendorExtensions = memoize((data: object) => {
  * @private
  * Renders the vendor extensions for a content node
  */
-export const NodeVendorExtensions = React.memo<NodeVendorExtensionsProps>(({ data }) => {
+export function NodeVendorExtensions ({ data }:NodeVendorExtensionsProps) {
   const { renderExtensionAddon } = useOptionsCtx();
 
   if (!renderExtensionAddon) {
@@ -59,5 +59,5 @@ export const NodeVendorExtensions = React.memo<NodeVendorExtensionsProps>(({ dat
       })}
     </>
   );
-});
+};
 NodeVendorExtensions.displayName = 'NodeVendorExtensions';

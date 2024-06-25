@@ -11,7 +11,7 @@ export const PersistenceContextProvider = JotaiProvider;
 /**
  * HOC that Wraps `WrappedComponent` in a `PersistenceContextProvider`.
  */
-export function withPersistenceBoundary<T>(WrappedComponent: React.ComponentType<T>) {
+export function withPersistenceBoundary<T>(WrappedComponent: any) {
   const WithPersistenceBoundary: React.FC<T> = props => {
     return (
       <PersistenceContextProvider>

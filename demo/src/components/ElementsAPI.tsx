@@ -6,7 +6,7 @@ import React, { useContext } from 'react';
 
 import { GlobalContext } from '../context';
 
-export const ElementsAPI: React.FC = () => {
+export default function ElementsAPI() {
   const { apiDescriptionUrl, layout } = useContext(GlobalContext);
 
   const specUrlWithProxy =
@@ -16,7 +16,8 @@ export const ElementsAPI: React.FC = () => {
 
   return (
     <Box flex={1} overflowY={layout !== 'stacked' ? 'hidden' : undefined}>
-      <API apiDescriptionUrl={specUrlWithProxy} router="hash" layout={layout} />
+        <API apiDescriptionUrl={specUrlWithProxy} router="hash" layout={layout} />
+
     </Box>
   );
 };

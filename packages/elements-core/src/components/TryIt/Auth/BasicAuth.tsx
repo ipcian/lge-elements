@@ -6,7 +6,7 @@ interface BasicAuthProps {
   value: string;
 }
 
-export const BasicAuth: React.FC<BasicAuthProps> = ({ onChange, value }) => {
+export function BasicAuth ({ onChange, value }:BasicAuthProps) {
   const [username = '', password = ''] = decode(value).split(':');
 
   const onCredentialsChange = (username: string, password: string) => {

@@ -5,24 +5,28 @@ import { useLineCount } from './hooks/useLineCount';
 
 const MAX_HIGHLIGHT_LINE_COUNT = 10000;
 
-export const ResponseCodeViewer: <E extends React.ElementType = 'pre'>(
-  props: CodeViewerProps<E>,
-) => React.ReactElement | null = ({ value, ...rest }) => {
-  const lineCount = useLineCount({ example: value });
+// ResponseCodeViewer 컴포넌트 정의
 
-  if (lineCount < MAX_HIGHLIGHT_LINE_COUNT) {
-    return <CodeViewer language="json" value={value} />;
-  }
+export function ResponseCodeViewer<E extends React.ElementType = 'pre'>(
+    // @ts-ignore
+    props: CodeViewerProps<E>,
+): JSX.Element | null {
+    const { value, ...rest } = props;
+    const lineCount = useLineCount({ example: value });
 
-  return (
-    <CodeViewer
-      language="json"
-      showAsRaw={MAX_HIGHLIGHT_LINE_COUNT < lineCount}
-      style={{
-        color: 'white',
-      }}
-      value={value}
-      {...rest}
-    />
-  );
-};
+    if (lineCount < MAX_HIGHLIGHT_LINE_COUNT) {
+        return <CodeViewer language="json" value={value} />;
+    }
+
+    return (
+        <CodeViewer
+            language="json"
+            showAsRaw={MAX_HIGHLIGHT_LINE_COUNT < lineCount}
+            style={{
+                color: 'white',
+            }}
+            value={value}
+            {...rest}
+        />
+    );
+}

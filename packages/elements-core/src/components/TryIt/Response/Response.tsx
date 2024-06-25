@@ -58,7 +58,7 @@ function parseBody(body: string, type: ContentType) {
   }
 }
 
-export const TryItResponse: React.FC<{ response: ResponseState }> = ({ response }) => {
+export function TryItResponse ({ response }:{ response: ResponseState })  {
   const contentType = response.contentType;
   const responseType = contentType ? getResponseType(contentType) : undefined;
   const bodyFormats = responseType ? bodyFormatMap[responseType] : [];
@@ -107,11 +107,11 @@ export const TryItResponse: React.FC<{ response: ResponseState }> = ({ response 
   );
 };
 
-const ResponseMenu: React.FC<{
+function ResponseMenu  ({ types, type, onChange }:{
   types: BodyFormat[];
   type: BodyFormat;
   onChange: (type: BodyFormat) => void;
-}> = ({ types, type, onChange }) => {
+}) {
   const menuItems = React.useMemo(() => {
     const items: MenuItems = types.map(type => ({
       id: type,
@@ -135,12 +135,14 @@ const ResponseMenu: React.FC<{
   );
 };
 
-export const ResponseError: React.FC<{ state: ErrorState }> = ({ state: { error } }) => (
-  <Panel defaultIsOpen>
-    <Panel.Titlebar>Error</Panel.Titlebar>
-    <Panel.Content>{isNetworkError(error) ? <NetworkErrorMessage /> : <p>{error.message}</p>}</Panel.Content>
-  </Panel>
-);
+export function ResponseError({ state: { error } }:{ state: ErrorState }) {
+  return (
+      <Panel defaultIsOpen>
+        <Panel.Titlebar>Error</Panel.Titlebar>
+        <Panel.Content>{isNetworkError(error) ? <NetworkErrorMessage/> : <p>{error.message}</p>}</Panel.Content>
+      </Panel>
+  )
+};
 
 const NetworkErrorMessage = () => (
   <>

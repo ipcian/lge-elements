@@ -120,7 +120,7 @@ export type Item = {
   uri: string;
 };
 
-export type RouterType = 'history' | 'memory' | 'hash' | 'static';
+export type RouterType = 'history' | 'memory' | 'hash';
 
 export interface RoutingProps {
   /**

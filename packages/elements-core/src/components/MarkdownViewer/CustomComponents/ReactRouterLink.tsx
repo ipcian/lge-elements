@@ -10,7 +10,7 @@ export const ReactRouterMarkdownLink = ({
   href: _href,
   children,
 }: Omit<LinkProps, 'target' | 'rel'> & { to?: string }) => {
-  const href = to || _href;
+  const href = to || _href || "";
 
   const isExternal = href !== undefined && externalRegex.test(href);
   if (isExternal) {
@@ -20,9 +20,10 @@ export const ReactRouterMarkdownLink = ({
       </a>
     );
   }
+  const c = children as any;
   return (
     <HashLink to={href} title={title}>
-      {children}
+      {c}
     </HashLink>
   );
 };

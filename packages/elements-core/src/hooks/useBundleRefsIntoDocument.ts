@@ -14,8 +14,8 @@ interface Options {
 /**
  * Fetches and bundles external $refs into an OAS document. Internal $refs are not resolved.
  */
-export function useBundleRefsIntoDocument(document: unknown, options?: Options) {
-  const [bundledData, setBundledData] = React.useState(document);
+export function useBundleRefsIntoDocument(document: any, options?: Options) {
+  const [bundledData, setBundledData] = React.useState<any>(document);
 
   const baseUrl = options?.baseUrl;
 
@@ -29,10 +29,12 @@ export function useBundleRefsIntoDocument(document: unknown, options?: Options) 
     doBundle(document, baseUrl)
       .then(res => {
         if (isMounted) {
+          // console.error({ ...res })
           setBundledData({ ...res }); // this hmm....library mutates document so a shallow copy is required to force a rerender in all cases
         }
       })
       .catch(reason => {
+        // console.error("12341234")
         if (typeof reason === 'object' && reason !== null && 'files' in reason) {
           if (isMounted) {
             setBundledData({ ...reason.files.schema });

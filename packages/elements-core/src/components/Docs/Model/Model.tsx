@@ -104,7 +104,7 @@ const ModelComponent: React.FC<ModelProps> = ({
   );
 };
 
-const ModelExamples = React.memo(({ data, isCollapsible = false }: { data: JSONSchema7; isCollapsible?: boolean }) => {
+const ModelExamples:any = React.memo(({ data, isCollapsible = false }: { data: JSONSchema7; isCollapsible?: boolean }) => {
   const [chosenExampleIndex, setChosenExampleIndex] = React.useState(0);
   const [show, setShow] = React.useState<boolean>(false);
   const [loading, setLoading] = React.useState<boolean>(false);
@@ -157,4 +157,4 @@ const ModelExamples = React.memo(({ data, isCollapsible = false }: { data: JSONS
   );
 });
 
-export const Model = withErrorBoundary<ModelProps>(ModelComponent, { recoverableProps: ['data'] });
+export const Model :any = withErrorBoundary<ModelProps>(ModelComponent, { recoverableProps: ['data'] });

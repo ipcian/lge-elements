@@ -29,7 +29,10 @@ const HttpOperationComponent = React.memo<HttpOperationProps>(
     const data = useResolvedObject(unresolvedData) as IHttpEndpointOperation;
     const { ref: layoutRef, isCompact } = useIsCompact(layoutOptions);
 
-    const mocking = React.useContext(MockingContext);
+    const mocking = React.useContext(MockingContext) as {
+        mockUrl?: string;
+        hideMocking?: boolean;
+    };
     const isDeprecated = !!data.deprecated;
     const isInternal = !!data.internal;
 
@@ -118,7 +121,7 @@ const HttpOperationComponent = React.memo<HttpOperationProps>(
 );
 HttpOperationComponent.displayName = 'HttpOperation.Component';
 
-export const HttpOperation = withErrorBoundary<HttpOperationProps>(HttpOperationComponent, {
+export const HttpOperation :any = withErrorBoundary<HttpOperationProps>(HttpOperationComponent, {
   recoverableProps: ['data'],
 });
 

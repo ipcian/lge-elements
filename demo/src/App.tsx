@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
 
 import { DemoNavbar } from './components/DemoNavbar';
-import { ElementsAPI } from './components/ElementsAPI';
+import ElementsAPI from './components/ElementsAPI';
 import { DEFAULT_API_URL } from './constants';
 import { GlobalContext } from './context';
 

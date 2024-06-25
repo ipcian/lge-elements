@@ -6,6 +6,8 @@ import { DEFAULT_API_URL, EXAMPLE_SPECS } from '../constants';
 import { GlobalContext } from '../context';
 
 export const DemoNavbar = () => {
+
+  const GitHubButtonAny = GitHubButton as any
   return (
     <>
       <InvertTheme>
@@ -16,7 +18,7 @@ export const DemoNavbar = () => {
             </Text>
 
             <Box style={{ height: 28 }}>
-              <GitHubButton
+              <GitHubButtonAny
                 href="https://github.com/stoplightio/elements"
                 data-color-scheme="no-preference: light; light: light; dark: light;"
                 data-icon="octicon-star"
@@ -25,7 +27,7 @@ export const DemoNavbar = () => {
                 aria-label="Star stoplightio/elements on GitHub"
               >
                 Star
-              </GitHubButton>
+              </GitHubButtonAny>
             </Box>
           </HStack>
 

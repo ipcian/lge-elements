@@ -4,9 +4,9 @@ import { useLocation } from 'react-router-dom';
 
 import { RouterTypeContext, useRouterType } from '../context/RouterType';
 
-export const LinkHeading = React.memo<LinkHeadingProps>(function LinkHeading(props) {
+export const LinkHeading:any = React.memo<LinkHeadingProps>(function LinkHeading(props) {
   const isUsingRouter = !!useRouterType();
-  const Comp = isUsingRouter ? CustomLinkHeading : MosaicLinkHeading;
+  const Comp:any = isUsingRouter ? CustomLinkHeading : MosaicLinkHeading;
 
   return <Comp {...props} />;
 });

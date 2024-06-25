@@ -32,12 +32,11 @@ import {
   isNodeGroup,
 } from './utils';
 
-const ActiveIdContext = React.createContext<string | undefined>(undefined);
-const LinkContext = React.createContext<CustomLinkComponent | undefined>(undefined);
+const ActiveIdContext:any = React.createContext<string | undefined>(undefined);
+const LinkContext:any = React.createContext<CustomLinkComponent | undefined>(undefined);
 LinkContext.displayName = 'LinkContext';
 
-export const TableOfContents = React.memo<TableOfContentsProps>(
-  ({
+export function TableOfContents ({
     tree,
     activeId,
     Link,
@@ -45,7 +44,7 @@ export const TableOfContents = React.memo<TableOfContentsProps>(
     externalScrollbar = false,
     isInResponsiveMode = false,
     onLinkClick,
-  }) => {
+  }:TableOfContentsProps) {
     const container = React.useRef<HTMLDivElement>(null);
     const child = React.useRef<HTMLDivElement>(null);
     const firstRender = useFirstRender();
@@ -102,11 +101,10 @@ export const TableOfContents = React.memo<TableOfContentsProps>(
         </Box>
       </Box>
     );
-  },
-);
+  }
 TableOfContents.displayName = 'TableOfContents';
 
-const Divider = React.memo<{
+const Divider:any = React.memo<{
   item: TableOfContentsDivider;
   isInResponsiveMode?: boolean;
 }>(({ item, isInResponsiveMode = false }) => {
@@ -127,7 +125,7 @@ const Divider = React.memo<{
 });
 Divider.displayName = 'Divider';
 
-const GroupItem = React.memo<{
+const GroupItem:any = React.memo<{
   depth: number;
   item: TableOfContentsGroupItem;
   isInResponsiveMode?: boolean;
@@ -189,7 +187,7 @@ const GroupItem = React.memo<{
 });
 GroupItem.displayName = 'GroupItem';
 
-const Group = React.memo<{
+const Group:any = React.memo<{
   depth: number;
   item: TableOfContentsGroup | TableOfContentsNodeGroup;
   maxDepthOpenByDefault?: number;
@@ -197,7 +195,7 @@ const Group = React.memo<{
   makeSlugAbsoluteRoute?: boolean;
   onLinkClick?(): void;
 }>(({ depth, item, maxDepthOpenByDefault, isInResponsiveMode, makeSlugAbsoluteRoute, onLinkClick = () => {} }) => {
-  const activeId = React.useContext(ActiveIdContext);
+  const activeId:any = React.useContext(ActiveIdContext);
   const [isOpen, setIsOpen] = React.useState(() => isGroupOpenByDefault(depth, item, activeId, maxDepthOpenByDefault));
   const hasActive = !!activeId && hasActiveItem(item.items, activeId);
 
@@ -296,7 +294,7 @@ const Group = React.memo<{
 });
 Group.displayName = 'Group';
 
-const Item = React.memo<{
+const Item:any = React.memo<{
   depth: number;
   title: string;
   isActive?: boolean;
@@ -344,7 +342,7 @@ const Item = React.memo<{
 });
 Item.displayName = 'Item';
 
-const Node = React.memo<{
+const Node:any = React.memo<{
   item: TableOfContentsNode | TableOfContentsNodeGroup;
   depth: number;
   meta?: React.ReactNode;
@@ -357,7 +355,7 @@ const Node = React.memo<{
   ({ item, depth, meta, showAsActive, isInResponsiveMode, makeSlugAbsoluteRoute, onClick, onLinkClick = () => {} }) => {
     const activeId = React.useContext(ActiveIdContext);
     const isActive = activeId === item.slug || activeId === item.id;
-    const LinkComponent = React.useContext(LinkContext);
+    const LinkComponent:any = React.useContext(LinkContext);
 
     const handleClick = (e: React.MouseEvent) => {
       if (isActive) {
@@ -402,7 +400,7 @@ const Node = React.memo<{
 );
 Node.displayName = 'Node';
 
-const Version: React.FC<{ value: string }> = ({ value }) => {
+function Version ({ value }:{ value: string }) {
   return (
     <Box mr={2}>
       <VersionBadge value={value} backgroundColor="#909DAB" />

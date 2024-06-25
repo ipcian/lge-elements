@@ -10,7 +10,7 @@ interface FileUploadParameterEditorProps {
   onChange: (parameterValue: File | undefined) => void;
 }
 
-export const FileUploadParameterEditor: React.FC<FileUploadParameterEditorProps> = ({ parameter, value, onChange }) => {
+export function FileUploadParameterEditor ({ parameter, value, onChange }:FileUploadParameterEditorProps) {
   const parameterDisplayName = `${parameter.name}${parameter.required ? '*' : ''}`;
   const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const file = event.currentTarget.files?.[0];

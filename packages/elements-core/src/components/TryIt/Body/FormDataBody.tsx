@@ -18,13 +18,13 @@ export interface FormDataBodyProps {
   isAllowedEmptyValues: ParameterOptional;
 }
 
-export const FormDataBody: React.FC<FormDataBodyProps> = ({
+export function FormDataBody({
   specification,
   values,
   onChangeValues,
   onChangeParameterAllow,
   isAllowedEmptyValues,
-}) => {
+}:FormDataBodyProps){
   const schema: SchemaNode = React.useMemo(() => {
     const schema = specification.schema ?? {};
     const tree = new SchemaTree(schema, { mergeAllOf: true, refResolver: null });

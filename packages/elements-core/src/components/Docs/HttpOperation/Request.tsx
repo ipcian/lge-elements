@@ -18,7 +18,7 @@ interface IRequestProps {
   onChange?: (requestBodyIndex: number) => void;
 }
 
-export const Request: React.FunctionComponent<IRequestProps> = ({
+export function Request({
   operation: {
     request,
     request: {
@@ -31,7 +31,7 @@ export const Request: React.FunctionComponent<IRequestProps> = ({
     security,
   },
   onChange,
-}) => {
+}:IRequestProps) {
   if (!request || typeof request !== 'object') return null;
 
   const bodyIsEmpty = isBodyEmpty(body);
@@ -88,7 +88,7 @@ Request.displayName = 'HttpOperation.Request';
 
 const schemeExpandedState = atomWithStorage<Record<string, boolean>>('HttpOperation_security_expanded', {});
 
-const SecurityPanel: React.FC<{ schemes: HttpSecurityScheme[]; includeKey: boolean }> = ({ schemes, includeKey }) => {
+function SecurityPanel ({ schemes, includeKey }:{ schemes: HttpSecurityScheme[]; includeKey: boolean }) {
   const [expandedState, setExpanded] = useAtom(schemeExpandedState);
 
   return (
@@ -131,6 +131,6 @@ const SecuritySchemes = ({ schemes, parentId }: { schemes: HttpSecurityScheme[][
   );
 };
 
-const OptionalMessage: React.FC = () => {
+function OptionalMessage() {
   return <Callout appearance="outline">{OptionalSecurityMessage}</Callout>;
 };

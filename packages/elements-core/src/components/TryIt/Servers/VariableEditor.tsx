@@ -11,7 +11,7 @@ interface VariableProps {
   validate?: boolean;
 }
 
-export const VariableEditor: React.FC<VariableProps> = ({ variable, value, onChange }) => {
+export function VariableEditor ({ variable, value, onChange }:VariableProps) {
   const inputId = useUniqueId(`id_${variable.name}_`);
 
   return (

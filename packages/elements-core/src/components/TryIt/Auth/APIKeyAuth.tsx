@@ -10,7 +10,7 @@ interface APIKeyAuthProps {
   value: string;
 }
 
-export const APIKeyAuth: React.FC<APIKeyAuthProps> = ({ scheme, onChange, value }) => {
+export function APIKeyAuth ({ scheme, onChange, value }:APIKeyAuthProps) {
   return (
     <Panel.Content className="ParameterGrid" data-test="auth-try-it-row">
       <AuthTokenInput type="apiKey" name={scheme.name} value={value} onChange={onChange} />

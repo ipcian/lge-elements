@@ -9,6 +9,7 @@ import URI from 'urijs';
 
 import { NodeTypeColors, NodeTypeIconDefs } from '../../../constants';
 import {
+  InlineRefResolverContext,
   InlineRefResolverProvider,
   useInlineRefResolver,
   useSchemaInlineRefResolver,
@@ -20,7 +21,6 @@ import { JSONSchema } from '../../../types';
 import { isHttpOperation, isJSONSchema } from '../../../utils/guards';
 import { getOriginalObject } from '../../../utils/ref-resolving/resolvedObject';
 import { TryIt } from '../../TryIt';
-import { CustomComponentMapping } from './Provider';
 
 type PartialHttpRequest = Pick<IHttpRequest, 'method' | 'url'> & Partial<IHttpRequest>;
 
@@ -67,10 +67,10 @@ const SchemaAndDescription = ({ title: titleProp, schema }: ISchemaAndDescriptio
 
 export { DefaultSMDComponents };
 
-export const CodeComponent: CustomComponentMapping['code'] = props => {
+export function CodeComponent  (props:any)  {
   const { title, jsonSchema, http, resolved, children } = props;
 
-  const resolver = useInlineRefResolver();
+  const resolver = useInlineRefResolver() as InlineRefResolverContext;
 
   const value = resolved || String(Array.isArray(children) ? children[0] : children);
   const parsedValue = useParsedValue(value);

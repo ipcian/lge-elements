@@ -20,7 +20,7 @@ interface ParameterProps {
   validate?: boolean;
 }
 
-export const ParameterEditor: React.FC<ParameterProps> = ({
+export function ParameterEditor({
   parameter,
   value,
   onChange,
@@ -28,7 +28,7 @@ export const ParameterEditor: React.FC<ParameterProps> = ({
   onChangeOptional,
   canChangeOptional,
   validate,
-}) => {
+}:ParameterProps) {
   const inputId = useUniqueId(`id_${parameter.name}_`);
   const inputCheckId = useUniqueId(`id_${parameter.name}_checked`);
   const parameterValueOptions = parameterOptions(parameter);

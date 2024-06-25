@@ -11,12 +11,12 @@ interface OperationParametersProps<P extends keyof any = string> {
   validate?: boolean;
 }
 
-export const OperationParameters: React.FC<OperationParametersProps> = ({
+export function OperationParameters ({
   parameters,
   values,
   onChangeValue,
   validate,
-}) => {
+}:OperationParametersProps) {
   return (
     <Panel defaultIsOpen>
       <Panel.Titlebar>Parameters</Panel.Titlebar>

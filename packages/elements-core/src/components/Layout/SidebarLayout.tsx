@@ -1,4 +1,7 @@
-import { Box, Flex } from '@stoplight/mosaic';
+import {
+    Box,
+    Flex
+} from '@stoplight/mosaic';
 import * as React from 'react';
 import { useLocation } from 'react-router-dom';
 
@@ -13,10 +16,14 @@ const MAX_CONTENT_WIDTH = 1800;
 const SIDEBAR_MIN_WIDTH = 300;
 const SIDEBAR_MAX_WIDTH = 1.5 * SIDEBAR_MIN_WIDTH;
 
-export const SidebarLayout = React.forwardRef<HTMLDivElement, SidebarLayoutProps>(
+export const SidebarLayout:any = React.forwardRef<HTMLDivElement, SidebarLayoutProps>(
   ({ sidebar, children, maxContentWidth = MAX_CONTENT_WIDTH, sidebarWidth = SIDEBAR_MIN_WIDTH }, ref) => {
     const scrollRef = React.useRef<HTMLDivElement | null>(null);
-    const [sidebarRef, currentSidebarWidth, startResizing] = useResizer(sidebarWidth);
+    const [
+        sidebarRef,
+        currentSidebarWidth,
+        startResizing
+    ] = useResizer(sidebarWidth);
     const { pathname } = useLocation();
 
     React.useEffect(() => {
