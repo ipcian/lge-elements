@@ -1,5 +1,6 @@
 import { faBullseye, faCloud, faCube, faCubes, faEnvelope, faEnvelopesBulk } from '@fortawesome/free-solid-svg-icons';
 import { IIconProps } from '@stoplight/mosaic';
+import {IndexSignature} from "@stoplight/elements-core/components/Docs/Model";
 
 // Icons appear left of the node title
 export const NODE_TYPE_TITLE_ICON: { [nodeType: string]: IIconProps['icon'] } = {
@@ -20,19 +21,20 @@ export const NODE_TYPE_META_ICON: { [nodeType: string]: IIconProps['icon'] } = {
   model: faCube,
 };
 
-export const NODE_TYPE_ICON_COLOR = {
+
+export const NODE_TYPE_ICON_COLOR : {[nodeType: string]: any} = {
   model: 'warning',
   http_service: '#D812EA',
   http_operation: '#9747FF',
   http_webhook: 'primary',
 };
 
-export const NODE_GROUP_ICON_COLOR = {
+export const NODE_GROUP_ICON_COLOR: IndexSignature = {
   http_webhook: 'primary',
   model: 'warning',
 };
 
-export const NODE_META_COLOR = {
+export const NODE_META_COLOR: IndexSignature = {
   get: 'success',
   post: 'primary',
   put: 'warning',

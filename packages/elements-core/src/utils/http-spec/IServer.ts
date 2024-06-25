@@ -2,6 +2,7 @@ import type { Dictionary, INodeVariable, IServer } from '@stoplight/types';
 import URI from 'urijs';
 
 import { isProperUrl } from '../guards';
+import {IndexSignature} from "@stoplight/elements-core/components/Docs/Model";
 
 export type ServerVariable = INodeVariable & { name: string };
 
@@ -53,7 +54,7 @@ export const getServerVariables = (server?: IServer | null): ServerVariable[] =>
 };
 
 export const getServerVariableDefaults = (server: IServer): Record<string, string> => {
-  const o = {};
+  const o: IndexSignature = {};
   if (server.variables) {
     for (const key in server.variables) {
       o[key] = server.variables[key].default;

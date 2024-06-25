@@ -2,6 +2,7 @@ import { hasRef } from '@stoplight/json';
 import { isArray, isPlainObject } from 'lodash';
 
 import { defaultResolver, ReferenceResolver } from './ReferenceResolver';
+import {IndexSignature} from "@stoplight/elements-core/components/Docs/Model";
 
 const originalObjectSymbol = Symbol('OriginalObject');
 
@@ -30,7 +31,7 @@ const recursivelyCreateResolvedObject = (
   };
 
   const resolvedObjectProxy = new Proxy(currentObject, {
-    get(target, name) {
+    get(target: IndexSignature, name) {
       if (name === originalObjectSymbol) return currentObject;
 
       const value = target[name];
@@ -74,10 +75,12 @@ const recursivelyCreateResolvedObject = (
 };
 
 export const isResolvedObjectProxy = (someObject: object): boolean => {
+  // @ts-ignore
   return !!someObject[originalObjectSymbol];
 };
 
 export const getOriginalObject = (resolvedObject: object): object => {
+  // @ts-ignore
   return resolvedObject[originalObjectSymbol] || resolvedObject;
 };
 

@@ -11,6 +11,7 @@ import {
 } from '@fortawesome/free-solid-svg-icons';
 import { IntentVals } from '@stoplight/mosaic';
 import { Dictionary, HttpSecurityScheme, NodeType } from '@stoplight/types';
+import {IndexSignature} from "@stoplight/elements-core/components/Docs/Model";
 
 export const NodeTypeColors: Dictionary<string, NodeType> = {
   http_operation: '#6a6acb',
@@ -74,7 +75,7 @@ export const HttpSecuritySchemeColors: Partial<Record<HttpSecurityScheme['type']
   mutualTLS: 'blue',
 };
 
-export const HttpMethodColors = {
+export const HttpMethodColors: IndexSignature = {
   get: 'success',
   post: 'primary',
   put: 'warning',
@@ -85,7 +86,7 @@ export const HttpMethodColors = {
   trace: '#0D0B28',
 } as const;
 
-export const HttpCodeColor = {
+export const HttpCodeColor: IndexSignature = {
   0: 'red',
   1: 'gray',
   2: 'green',
@@ -97,7 +98,7 @@ export const HttpCodeColor = {
 /**
  *  Map of HTTP codes to their common description
  */
-export const HttpCodeDescriptions = {
+export const HttpCodeDescriptions: IndexSignature = {
   100: 'Continue',
   101: 'Switching Protocols',
   200: 'OK',

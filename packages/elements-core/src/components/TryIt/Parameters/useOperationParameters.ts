@@ -1,3 +1,4 @@
+import { IndexSignature } from '@stoplight/elements-core/components/Docs/Model';
 import { IHttpEndpointOperation } from '@stoplight/types';
 import { atom, useAtom } from 'jotai';
 import { orderBy, uniqBy } from 'lodash';
@@ -6,7 +7,7 @@ import * as React from 'react';
 import { filterOutAuthorizationParams } from '../Auth/authentication-utils';
 import { initialParameterValues, ParameterSpec } from './parameter-utils';
 
-const persistedParameterValuesAtom = atom({});
+const persistedParameterValuesAtom = atom<IndexSignature>({});
 export const useRequestParameters = (httpOperation: IHttpEndpointOperation) => {
   const [persistedParameterValues, setPersistedParameterValues] = useAtom(persistedParameterValuesAtom);
 

@@ -21,7 +21,7 @@ export type NodeVendorExtensionsProps = {
  *
  * @param data The object to extract the vendor extensions from.
  */
-const getVendorExtensions = memoize((data: object) => {
+const getVendorExtensions = memoize((data: any) => {
   const vendorExtensionNames = Object.keys(data).filter(item => item.startsWith('x-'));
   const vendorExtensions = vendorExtensionNames.reduce((previousValue, currentValue, currentIndex: number) => {
     return {

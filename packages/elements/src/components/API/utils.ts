@@ -148,6 +148,7 @@ export const isInternal = (node: ServiceChildNode | ServiceNode): boolean => {
     return false;
   }
 
+  // @ts-ignore
   return !!data['x-internal'];
 };
 

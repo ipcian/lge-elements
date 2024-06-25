@@ -117,5 +117,7 @@
       "@commitlint/config-conventional"
     ]
   },
-  "dependencies": {}
+  "dependencies": {
+    "@stoplight/scripts": "^10.0.0"
+  }
 }

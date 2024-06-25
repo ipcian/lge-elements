@@ -120,7 +120,7 @@ export function TryIt({
   const getValues = () =>
     Object.keys(bodyParameterValues)
       .filter(param => !isAllowedEmptyValues[param] ?? true)
-      .reduce((previousValue, currentValue) => {
+      .reduce((previousValue: any, currentValue) => {
         previousValue[currentValue] = bodyParameterValues[currentValue];
         return previousValue;
       }, {});

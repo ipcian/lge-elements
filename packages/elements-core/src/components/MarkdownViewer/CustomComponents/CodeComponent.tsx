@@ -25,13 +25,8 @@ import { TryIt } from '../../TryIt';
 type PartialHttpRequest = Pick<IHttpRequest, 'method' | 'url'> & Partial<IHttpRequest>;
 
 function isPartialHttpRequest(maybeHttpRequest: unknown): maybeHttpRequest is PartialHttpRequest {
-  return (
-    isObject(maybeHttpRequest) &&
-    'method' in maybeHttpRequest &&
-    typeof maybeHttpRequest['method'] === 'string' &&
-    'url' in maybeHttpRequest &&
-    typeof maybeHttpRequest['url'] === 'string'
-  );
+  // @ts-ignore
+  return (isObject(maybeHttpRequest) && 'method' in maybeHttpRequest && typeof maybeHttpRequest['method'] === 'string' && 'url' in maybeHttpRequest && typeof maybeHttpRequest['url'] === 'string');
 }
 
 interface ISchemaAndDescriptionProps {

@@ -79,7 +79,7 @@ function computeServiceNode(
 
 function computeChildNodes(
   document: Spec | OpenAPIObject,
-  data: unknown,
+  data: any,
   map: ISourceNodeMap[],
   transformer: Oas2HttpOperationTransformer | Oas3HttpEndpointOperationTransformer,
   parentUri: string = '',
@@ -161,6 +161,7 @@ function computeChildNodes(
       }
 
       if (match.children) {
+        // @ts-ignore
         nodes.push(...computeChildNodes(document, data[key], match.children, transformer, uri));
       }
     }

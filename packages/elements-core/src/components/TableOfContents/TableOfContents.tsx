@@ -32,79 +32,80 @@ import {
   isNodeGroup,
 } from './utils';
 
-const ActiveIdContext:any = React.createContext<string | undefined>(undefined);
-const LinkContext:any = React.createContext<CustomLinkComponent | undefined>(undefined);
+const ActiveIdContext: any = React.createContext<string | undefined>(undefined);
+const LinkContext: any = React.createContext<CustomLinkComponent | undefined>(undefined);
 LinkContext.displayName = 'LinkContext';
 
-export function TableOfContents ({
-    tree,
-    activeId,
-    Link,
-    maxDepthOpenByDefault,
-    externalScrollbar = false,
-    isInResponsiveMode = false,
-    onLinkClick,
-  }:TableOfContentsProps) {
-    const container = React.useRef<HTMLDivElement>(null);
-    const child = React.useRef<HTMLDivElement>(null);
-    const firstRender = useFirstRender();
+export function TableOfContents({
+  tree,
+  activeId,
+  Link,
+  maxDepthOpenByDefault,
+  externalScrollbar = false,
+  isInResponsiveMode = false,
+  onLinkClick,
+}: TableOfContentsProps) {
+  const container = React.useRef<HTMLDivElement>(null);
+  const child = React.useRef<HTMLDivElement>(null);
+  const firstRender = useFirstRender();
 
-    // when using the hash router, slugs must be absolute - otherwise the router will keep appending to the existing hash route
-    // this flag makes a slug like `abc/operations/getPet` be rendered as `#/abc/operations/getPet`
-    const makeSlugAbsoluteRoute = useRouterType() == 'hash';
+  // when using the hash router, slugs must be absolute - otherwise the router will keep appending to the existing hash route
+  // this flag makes a slug like `abc/operations/getPet` be rendered as `#/abc/operations/getPet`
+  const makeSlugAbsoluteRoute = useRouterType() == 'hash';
 
-    React.useEffect(() => {
-      // setTimeout to handle scrollTo after groups expand to display active GroupItem
-      setTimeout(() => {
-        // First render should center, all others just scroll into view
-        const scrollPosition = firstRender ? 'center' : 'nearest';
-        const tocHasScrollbar =
-          externalScrollbar ||
-          (container.current && child.current && container.current.offsetHeight < child.current.offsetHeight);
+  React.useEffect(() => {
+    // setTimeout to handle scrollTo after groups expand to display active GroupItem
+    setTimeout(() => {
+      // First render should center, all others just scroll into view
+      const scrollPosition = firstRender ? 'center' : 'nearest';
+      const tocHasScrollbar =
+        externalScrollbar ||
+        (container.current && child.current && container.current.offsetHeight < child.current.offsetHeight);
 
-        if (activeId && typeof window !== 'undefined' && tocHasScrollbar) {
-          const elem = window.document.getElementById(getHtmlIdFromItemId(activeId));
-          if (elem && 'scrollIntoView' in elem) {
-            elem.scrollIntoView({ block: scrollPosition });
-          }
+      if (activeId && typeof window !== 'undefined' && tocHasScrollbar) {
+        const elem = window.document.getElementById(getHtmlIdFromItemId(activeId));
+        if (elem && 'scrollIntoView' in elem) {
+          elem.scrollIntoView({ block: scrollPosition });
         }
-      }, 0);
+      }
+    }, 0);
 
-      // Only run when activeId changes
-      // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [activeId]);
+    // Only run when activeId changes
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [activeId]);
 
-    return (
-      <Box ref={container} w="full" bg={isInResponsiveMode ? 'canvas' : 'canvas-100'} overflowY="auto">
-        <Box ref={child} my={3}>
-          <LinkContext.Provider value={Link}>
-            <ActiveIdContext.Provider value={activeId}>
-              {tree.map((item, key) => {
-                if (isDivider(item)) {
-                  return <Divider key={key} item={item} isInResponsiveMode={isInResponsiveMode} />;
-                }
+  return (
+    <Box ref={container} w="full" bg={isInResponsiveMode ? 'canvas' : 'canvas-100'} overflowY="auto">
+      <Box ref={child} my={3}>
+        <LinkContext.Provider value={Link}>
+          <ActiveIdContext.Provider value={activeId}>
+            {tree.map((item, key) => {
+              if (isDivider(item)) {
+                return <Divider key={key} item={item} isInResponsiveMode={isInResponsiveMode} />;
+              }
 
-                return (
-                  <GroupItem
-                    key={key}
-                    item={item}
-                    depth={0}
-                    maxDepthOpenByDefault={maxDepthOpenByDefault}
-                    onLinkClick={onLinkClick}
-                    isInResponsiveMode={isInResponsiveMode}
-                    makeSlugAbsoluteRoute={makeSlugAbsoluteRoute}
-                  />
-                );
-              })}
-            </ActiveIdContext.Provider>
-          </LinkContext.Provider>
-        </Box>
+              return (
+                <GroupItem
+                  key={key}
+                  item={item}
+                  depth={0}
+                  maxDepthOpenByDefault={maxDepthOpenByDefault}
+                  onLinkClick={onLinkClick}
+                  isInResponsiveMode={isInResponsiveMode}
+                  makeSlugAbsoluteRoute={makeSlugAbsoluteRoute}
+                />
+              );
+            })}
+          </ActiveIdContext.Provider>
+        </LinkContext.Provider>
       </Box>
-    );
-  }
+    </Box>
+  );
+}
+
 TableOfContents.displayName = 'TableOfContents';
 
-const Divider:any = React.memo<{
+const Divider: any = React.memo<{
   item: TableOfContentsDivider;
   isInResponsiveMode?: boolean;
 }>(({ item, isInResponsiveMode = false }) => {
@@ -125,7 +126,7 @@ const Divider:any = React.memo<{
 });
 Divider.displayName = 'Divider';
 
-const GroupItem:any = React.memo<{
+const GroupItem: any = React.memo<{
   depth: number;
   item: TableOfContentsGroupItem;
   isInResponsiveMode?: boolean;
@@ -187,7 +188,7 @@ const GroupItem:any = React.memo<{
 });
 GroupItem.displayName = 'GroupItem';
 
-const Group:any = React.memo<{
+const Group: any = React.memo<{
   depth: number;
   item: TableOfContentsGroup | TableOfContentsNodeGroup;
   maxDepthOpenByDefault?: number;
@@ -195,7 +196,7 @@ const Group:any = React.memo<{
   makeSlugAbsoluteRoute?: boolean;
   onLinkClick?(): void;
 }>(({ depth, item, maxDepthOpenByDefault, isInResponsiveMode, makeSlugAbsoluteRoute, onLinkClick = () => {} }) => {
-  const activeId:any = React.useContext(ActiveIdContext);
+  const activeId: any = React.useContext(ActiveIdContext);
   const [isOpen, setIsOpen] = React.useState(() => isGroupOpenByDefault(depth, item, activeId, maxDepthOpenByDefault));
   const hasActive = !!activeId && hasActiveItem(item.items, activeId);
 
@@ -294,7 +295,7 @@ const Group:any = React.memo<{
 });
 Group.displayName = 'Group';
 
-const Item:any = React.memo<{
+const Item: any = React.memo<{
   depth: number;
   title: string;
   isActive?: boolean;
@@ -342,7 +343,7 @@ const Item:any = React.memo<{
 });
 Item.displayName = 'Item';
 
-const Node:any = React.memo<{
+const Node: any = React.memo<{
   item: TableOfContentsNode | TableOfContentsNodeGroup;
   depth: number;
   meta?: React.ReactNode;
@@ -355,7 +356,7 @@ const Node:any = React.memo<{
   ({ item, depth, meta, showAsActive, isInResponsiveMode, makeSlugAbsoluteRoute, onClick, onLinkClick = () => {} }) => {
     const activeId = React.useContext(ActiveIdContext);
     const isActive = activeId === item.slug || activeId === item.id;
-    const LinkComponent:any = React.useContext(LinkContext);
+    const LinkComponent: any = React.useContext(LinkContext);
 
     const handleClick = (e: React.MouseEvent) => {
       if (isActive) {
@@ -400,10 +401,10 @@ const Node:any = React.memo<{
 );
 Node.displayName = 'Node';
 
-function Version ({ value }:{ value: string }) {
+function Version({ value }: { value: string }) {
   return (
     <Box mr={2}>
       <VersionBadge value={value} backgroundColor="#909DAB" />
     </Box>
   );
-};
+}

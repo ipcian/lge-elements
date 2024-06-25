@@ -8,6 +8,7 @@ import * as React from 'react';
 import { useSchemaInlineRefResolver } from '../../../context/InlineRefResolver';
 import { useOptionsCtx } from '../../../context/Options';
 import { isNodeExample } from '../../../utils/http-spec/examples';
+import {IndexSignature} from "@stoplight/elements-core/components/Docs/Model";
 
 type ParameterType = 'query' | 'header' | 'path' | 'cookie';
 
@@ -16,7 +17,7 @@ interface ParametersProps {
   parameters?: IHttpParam[];
 }
 
-const readableStyles = {
+const readableStyles: IndexSignature = {
   [HttpParamStyles.PipeDelimited]: 'Pipe separated values',
   [HttpParamStyles.SpaceDelimited]: 'Space separated values',
   [HttpParamStyles.CommaDelimited]: 'Comma separated values',
