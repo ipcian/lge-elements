@@ -11,6 +11,7 @@ interface APIKeyAuthProps {
 }
 
 export function APIKeyAuth ({ scheme, onChange, value }:APIKeyAuthProps) {
+
   return (
     <Panel.Content className="ParameterGrid" data-test="auth-try-it-row">
       <AuthTokenInput type="apiKey" name={scheme.name} value={value} onChange={onChange} />
