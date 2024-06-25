@@ -7,6 +7,7 @@
     "type": "git",
     "url": "https://github.com/ipcian/lge-elements.git"
   },
+  "version": "1.0.0",
   "workspaces": [
     "demo",
     "packages/*"
