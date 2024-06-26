@@ -75,7 +75,7 @@
     "postbuild": "yarn workspace @lge/elements test.packaging && yarn workspace @lge/elements-core test.packaging && yarn workspace @lge/elements-dev-portal test.packaging",
     "lint": "eslint '{packages,examples}/*/src/**/*.{ts,tsx}'",
     "version": "lerna version --no-push",
-    "release": "lerna publish from-package --yes --registry https://registry.npmjs.org",
+    "release": "lerna publish logs from-package --yes --registry https://registry.npmjs.org",
     "release.docs": "yarn workspace @lge/elements release.docs",
     "type-check": "yarn workspaces run type-check",
     "test": "yarn workspace @lge/elements test && yarn workspace @lge/elements-core test && yarn workspace @lge/elements-dev-portal test --passWithNoTests",
