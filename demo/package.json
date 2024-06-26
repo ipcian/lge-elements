@@ -1,6 +1,6 @@
 {
   "name": "@lge/elements-demo",
-  "version": "7.0.1",
+  "version": "1.0.0",
   "private": true,
   "scripts": {
     "build": "yarn run clean-dist && webpack --config=webpack/prod.js",
