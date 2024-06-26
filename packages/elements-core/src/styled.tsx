@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 import { Box } from '@stoplight/mosaic';
 import * as PropTypes from 'prop-types';
 import * as React from 'react';

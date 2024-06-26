@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 import {
   DeprecatedBadge,
   Docs,
@@ -55,7 +57,7 @@ const TryItContext: any = React.createContext<{
 });
 TryItContext.displayName = 'TryItContext';
 
-const LocationContext : any = React.createContext<{
+const LocationContext: any = React.createContext<{
   location: Location;
 }>({
   location: {
@@ -68,7 +70,7 @@ const LocationContext : any = React.createContext<{
 });
 LocationContext.displayName = 'LocationContext';
 
-export function APIWithStackedLayout ({
+export function APIWithStackedLayout({
   serviceNode,
   hideTryIt,
   hideExport,
@@ -78,7 +80,7 @@ export function APIWithStackedLayout ({
   renderExtensionAddon,
   showPoweredByLink = true,
   location,
-}:StackedLayoutProps) {
+}: StackedLayoutProps) {
   const { groups: operationGroups } = computeTagGroups<OperationNode>(serviceNode, NodeType.HttpOperation);
   const { groups: webhookGroups } = computeTagGroups<WebhookNode>(serviceNode, NodeType.HttpWebhook);
 
@@ -111,10 +113,10 @@ export function APIWithStackedLayout ({
       </TryItContext.Provider>
     </LocationContext.Provider>
   );
-};
+}
 APIWithStackedLayout.displayName = 'APIWithStackedLayout';
 
-function Group({ group }:{ group: TagGroup<OperationNode | WebhookNode> }) {
+function Group({ group }: { group: TagGroup<OperationNode | WebhookNode> }) {
   const [isExpanded, setIsExpanded] = React.useState(false);
   const scrollRef = React.useRef<HTMLDivElement | null>(null);
   const {
@@ -165,11 +167,11 @@ function Group({ group }:{ group: TagGroup<OperationNode | WebhookNode> }) {
       </Collapse>
     </Box>
   );
-};
+}
 
 Group.displayName = 'Group';
 
-function Item({ item }:{ item: OperationNode | WebhookNode }) {
+function Item({ item }: { item: OperationNode | WebhookNode }) {
   const { location } = React.useContext(LocationContext);
   const { hash } = location;
   const [isExpanded, setIsExpanded] = React.useState(false);
@@ -192,10 +194,10 @@ function Item({ item }:{ item: OperationNode | WebhookNode }) {
   const ParsedDocsAny = ParsedDocs as any;
   function Docs() {
     return <Tab>Docs</Tab>;
-  };
+  }
   function TryIt() {
     return <Tab>TryIt</Tab>;
-  };
+  }
 
   return (
     <Box
@@ -263,11 +265,11 @@ function Item({ item }:{ item: OperationNode | WebhookNode }) {
       </Collapse>
     </Box>
   );
-};
+}
 
 Item.displayName = 'Item';
 
-function Collapse({ isOpen, children }:{ isOpen: boolean; children:any }){
+function Collapse({ isOpen, children }: { isOpen: boolean; children: any }) {
   if (!isOpen) return null;
 
   return <Box>{children}</Box>;

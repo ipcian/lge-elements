@@ -6,12 +6,12 @@
     "src/web-components/**",
     "**/*.css"
   ],
-  "homepage": "https://github.com/stoplightio/elements",
-  "bugs": "https://github.com/stoplightio/elements/issues",
-  "author": "Stoplight <support@stoplight.io>",
+  "homepage": "https://github.com/ipcian/lge-elements",
+  "bugs": "https://github.com/ipcian/elements-core",
+  "author": "jsyoon <jsyoon@engistech.com>",
   "repository": {
     "type": "git",
-    "url": "https://github.com/stoplightio/elements"
+    "url": "https://github.com/ipcian/lge-elements"
   },
   "license": "Apache-2.0",
   "type": "commonjs",

@@ -235,9 +235,9 @@ export function APIImpl(props:APIProps) {
       )}
     </InlineRefResolverProvider>
   );
-};
+}
 
-export const API:any = flow(
+export const API: any = flow(
   withRouter,
   withStyles,
   withPersistenceBoundary,
