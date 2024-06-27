@@ -6,9 +6,8 @@ import {
   isOauth2ClientCredentialsOrPasswordFlow,
   isOAuth2ImplicitFlow,
 } from './oas/security';
-import {IndexSignature} from "@stoplight/elements-core/components/Docs/Model";
 
-const oauthFlowNames: Record<keyof IOauthFlowObjects, string> & IndexSignature = {
+const oauthFlowNames: Record<keyof IOauthFlowObjects, string> = {
   implicit: 'Implicit',
   authorizationCode: 'Authorization Code',
   clientCredentials: 'Client Credentials',
@@ -65,11 +64,7 @@ function getDigestAuthDescription() {
   Example: \`Authorization: Digest username=guest, realm="test", nonce="2", uri="/uri", response="123"\``;
 }
 
-export interface NewIOauth2SecurityScheme extends IOauth2SecurityScheme {
-  flows: IOauthFlowObjects & IndexSignature;
-}
-
-function getOAuthDescription(scheme: NewIOauth2SecurityScheme) {
+function getOAuthDescription(scheme: IOauth2SecurityScheme) {
   const flows = keys(scheme.flows);
   return flows.map(flow => getOAuthFlowDescription(oauthFlowNames[flow], scheme.flows[flow])).join('\n\n');
 }

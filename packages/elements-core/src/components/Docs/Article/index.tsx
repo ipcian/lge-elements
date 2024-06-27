@@ -10,13 +10,14 @@ import { DocsComponentProps } from '..';
 
 type ArticleProps = DocsComponentProps<IMarkdownViewerProps['markdown']>;
 
-function ArticleComponentForHashRouter(data:ArticleProps) {
+const ArticleComponentForHashRouter = React.memo<ArticleProps>(({ data }) => {
   const { pathname } = useLocation();
   const basePath = `#${pathname.split('#')[0]}`;
-  return <BaseArticleComponent data={data} tocBasePath={basePath} />;
-}
 
-const BaseArticleComponent:any = React.memo<ArticleProps & { tocBasePath?: string }>(({ data, ...props }) => {
+  return <BaseArticleComponent data={data} tocBasePath={basePath} />;
+});
+
+const BaseArticleComponent = React.memo<ArticleProps & { tocBasePath?: string }>(({ data, ...props }) => {
   return (
     <Box className="sl-elements-article">
       <MarkdownViewer className="sl-elements-article-content" markdown={data} includeToc {...props} />
@@ -34,4 +35,4 @@ const ArticleComponent = React.memo<ArticleProps>(({ data }) => {
   return <BaseArticleComponent data={data} />;
 });
 
-export const Article : any = withErrorBoundary<ArticleProps>(ArticleComponent, { recoverableProps: ['data'] });
+export const Article = withErrorBoundary<ArticleProps>(ArticleComponent, { recoverableProps: ['data'] });

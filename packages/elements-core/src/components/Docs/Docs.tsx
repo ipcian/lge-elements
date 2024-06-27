@@ -167,7 +167,8 @@ export interface DocsComponentProps<T = unknown> extends BaseDocsProps {
   data: T;
 }
 
-export function Docs({
+export const Docs = React.memo<DocsProps>(
+  ({
     nodeType,
     nodeData,
     useNodeForRefResolving = false,
@@ -176,7 +177,7 @@ export function Docs({
     nodeHasChanged,
     renderExtensionAddon,
     ...commonProps
-  }:DocsProps):JSX.Element | null {
+  }) => {
     const parsedNode = useParsedData(nodeType, nodeData);
 
     if (!parsedNode) {
@@ -199,14 +200,14 @@ export function Docs({
         {elem}
       </ElementsOptionsProvider>
     );
-  };
+  },
+);
 
 export interface ParsedDocsProps extends BaseDocsProps {
   node: ParsedNode;
 }
 
-export function ParsedDocs ({ node, nodeUnsupported, ...commonProps }: ParsedDocsProps) {
-  console.log(node.type)
+export const ParsedDocs = ({ node, nodeUnsupported, ...commonProps }: ParsedDocsProps) => {
   switch (node.type) {
     case 'article':
       return <Article data={node.data} {...commonProps} />;

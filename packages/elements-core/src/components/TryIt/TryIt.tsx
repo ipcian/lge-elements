@@ -72,7 +72,7 @@ export interface TryItProps {
 
 const defaultServers: IServer[] = [];
 
-export function TryIt({
+export const TryIt: React.FC<TryItProps> = ({
   httpOperation,
   mockUrl,
   onRequestChange,
@@ -80,8 +80,8 @@ export function TryIt({
   embeddedInMd = false,
   tryItCredentialsPolicy,
   corsProxy,
-}:TryItProps) {
-  // TryIt.displayName = 'TryIt';
+}) => {
+  TryIt.displayName = 'TryIt';
   const isDark = useThemeIsDark();
 
   const [response, setResponse] = React.useState<ResponseState | ErrorState | undefined>();
@@ -120,7 +120,7 @@ export function TryIt({
   const getValues = () =>
     Object.keys(bodyParameterValues)
       .filter(param => !isAllowedEmptyValues[param] ?? true)
-      .reduce((previousValue: any, currentValue) => {
+      .reduce((previousValue, currentValue) => {
         previousValue[currentValue] = bodyParameterValues[currentValue];
         return previousValue;
       }, {});

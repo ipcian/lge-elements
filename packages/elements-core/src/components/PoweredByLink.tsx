@@ -2,12 +2,12 @@ import { faBolt } from '@fortawesome/free-solid-svg-icons';
 import { Box, Flex, Icon } from '@stoplight/mosaic';
 import * as React from 'react';
 
-export function PoweredByLink({ source, pathname, packageType, layout = 'sidebar' }:{
+export const PoweredByLink: React.FC<{
   source: string;
   pathname: string;
   packageType: 'elements' | 'elements-dev-portal';
   layout?: 'sidebar' | 'stacked';
-}) {
+}> = ({ source, pathname, packageType, layout = 'sidebar' }) => {
   return (
     <Flex
       as="a"

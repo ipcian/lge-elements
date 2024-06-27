@@ -15,11 +15,8 @@ interface ServerInfoProps {
   mockUrl?: string;
 }
 
-export function ServerInfo ({ servers, mockUrl }:ServerInfoProps) {
-  const mocking = React.useContext(MockingContext) as {
-    mockUrl?: string;
-    hideMocking?: boolean;
-  };
+export const ServerInfo: React.FC<ServerInfoProps> = ({ servers, mockUrl }) => {
+  const mocking = React.useContext(MockingContext);
   const showMocking = !mocking.hideMocking && mockUrl && isProperUrl(mockUrl);
   const $mockUrl = showMocking ? mockUrl || mocking.mockUrl : undefined;
 
@@ -55,14 +52,14 @@ export function ServerInfo ({ servers, mockUrl }:ServerInfoProps) {
   );
 };
 
-function ServerUrl({
+const ServerUrl: React.FC<IServer & { hasAnyServerVariables: boolean; defaultIsOpen: boolean }> = ({
   id,
   description,
   url,
   variables,
   hasAnyServerVariables,
   defaultIsOpen,
-}:IServer & { hasAnyServerVariables: boolean; defaultIsOpen: boolean })  {
+}) => {
   const { nodeHasChanged } = useOptionsCtx();
   const { onCopy, hasCopied } = useClipboard(url);
   const urlFragments = useSplitUrl(url);

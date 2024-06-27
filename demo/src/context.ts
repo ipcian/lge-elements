@@ -13,4 +13,4 @@ export const defaultGlobalContext: GlobalContext = {
   setDescriptionUrl: () => {},
 };
 
-export const GlobalContext : any = createContext<GlobalContext>(defaultGlobalContext);
+export const GlobalContext = createContext<GlobalContext>(defaultGlobalContext);

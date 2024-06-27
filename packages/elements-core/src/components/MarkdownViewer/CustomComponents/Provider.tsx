@@ -10,13 +10,11 @@ export type CustomComponentMapping = MDVCustomComponentMapping;
 
 interface MarkdownComponentsProviderProps {
   value: Partial<CustomComponentMapping> | undefined;
-  children?:any
 }
 
 /**
  * Provides components to markdown-viewer.
  */
-export function MarkdownComponentsProvider ({ value, children }:MarkdownComponentsProviderProps) {
-  // @ts-ignore
+export const MarkdownComponentsProvider: React.FC<MarkdownComponentsProviderProps> = ({ value, children }) => {
   return <MarkdownViewerProvider components={{ code: CodeComponent!, ...value }}>{children}</MarkdownViewerProvider>;
 };

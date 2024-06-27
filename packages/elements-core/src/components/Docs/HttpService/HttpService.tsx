@@ -1,10 +1,4 @@
-import {
-    Box,
-    Flex,
-    Heading,
-    NodeAnnotation,
-    VStack
-} from '@stoplight/mosaic';
+import { Box, Flex, Heading, NodeAnnotation, VStack } from '@stoplight/mosaic';
 import { withErrorBoundary } from '@stoplight/react-error-boundary';
 import { IHttpService } from '@stoplight/types';
 import * as React from 'react';
@@ -13,7 +7,7 @@ import { MockingContext } from '../../../containers/MockingProvider';
 import { useResolvedObject } from '../../../context/InlineRefResolver';
 import { useOptionsCtx } from '../../../context/Options';
 import { useIsCompact } from '../../../hooks/useIsCompact';
-// import { MarkdownViewer } from '../../MarkdownViewer';
+import { MarkdownViewer } from '../../MarkdownViewer';
 import { PoweredByLink } from '../../PoweredByLink';
 import { DocsComponentProps } from '..';
 import { VersionBadge } from '../HttpOperation/Badges';
@@ -21,7 +15,6 @@ import { AdditionalInfo } from './AdditionalInfo';
 import { ExportButton } from './ExportButton';
 import { SecuritySchemes } from './SecuritySchemes';
 import { ServerInfo } from './ServerInfo';
-import {MarkdownViewer} from "@stoplight/elements-core/components/MarkdownViewer";
 
 export type HttpServiceProps = DocsComponentProps<Partial<IHttpService>>;
 
@@ -31,21 +24,13 @@ const HttpServiceComponent = React.memo<HttpServiceProps>(
     const data = useResolvedObject(unresolvedData) as IHttpService;
     const { ref: layoutRef, isCompact } = useIsCompact(layoutOptions);
 
-    const {
-        search,
-        pathname
-    } = location;
-    const mocking = React.useContext(MockingContext) as {
-        mockUrl?: string;
-        hideMocking?: boolean;
-    };
+    const { search, pathname } = location;
+    const mocking = React.useContext(MockingContext);
     const query = new URLSearchParams(search);
 
     const nameChanged = nodeHasChanged?.({ nodeId: data.id, attr: 'name' });
     const versionChanged = nodeHasChanged?.({ nodeId: data.id, attr: 'version' });
     const descriptionChanged = nodeHasChanged?.({ nodeId: data.id, attr: 'description' });
-
-
 
     return (
       <Box ref={layoutRef} mb={10} className="HttpService">
@@ -110,4 +95,4 @@ const HttpServiceComponent = React.memo<HttpServiceProps>(
 );
 HttpServiceComponent.displayName = 'HttpService.Component';
 
-export const HttpService:any = withErrorBoundary<HttpServiceProps>(HttpServiceComponent, { recoverableProps: ['data'] });
+export const HttpService = withErrorBoundary<HttpServiceProps>(HttpServiceComponent, { recoverableProps: ['data'] });

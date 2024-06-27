@@ -21,7 +21,7 @@ export type NodeVendorExtensionsProps = {
  *
  * @param data The object to extract the vendor extensions from.
  */
-const getVendorExtensions = memoize((data: any) => {
+const getVendorExtensions = memoize((data: object) => {
   const vendorExtensionNames = Object.keys(data).filter(item => item.startsWith('x-'));
   const vendorExtensions = vendorExtensionNames.reduce((previousValue, currentValue, currentIndex: number) => {
     return {
@@ -36,7 +36,7 @@ const getVendorExtensions = memoize((data: any) => {
  * @private
  * Renders the vendor extensions for a content node
  */
-export function NodeVendorExtensions ({ data }:NodeVendorExtensionsProps) {
+export const NodeVendorExtensions = React.memo<NodeVendorExtensionsProps>(({ data }) => {
   const { renderExtensionAddon } = useOptionsCtx();
 
   if (!renderExtensionAddon) {
@@ -59,5 +59,5 @@ export function NodeVendorExtensions ({ data }:NodeVendorExtensionsProps) {
       })}
     </>
   );
-};
+});
 NodeVendorExtensions.displayName = 'NodeVendorExtensions';

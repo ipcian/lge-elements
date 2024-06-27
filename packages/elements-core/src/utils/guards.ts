@@ -5,7 +5,6 @@ import { JSONSchema7 } from 'json-schema';
 import { isObject, isPlainObject } from 'lodash';
 
 export function isSMDASTRoot(maybeAst: unknown): maybeAst is IMarkdownViewerProps['markdown'] {
-  // @ts-ignore
   return isObject(maybeAst) && maybeAst['type'] === 'root' && isArray(maybeAst['children']);
 }
 

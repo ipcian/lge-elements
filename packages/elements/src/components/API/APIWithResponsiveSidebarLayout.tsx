@@ -7,7 +7,7 @@ import {
 import { ExtensionAddonRenderer } from '@stoplight/elements-core/components/Docs';
 import { NodeType } from '@stoplight/types';
 import * as React from 'react';
-import {useNavigate, useLocation} from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 
 import { ServiceNode } from '../../utils/oas/types';
 import { computeAPITree, findFirstNodeSlug, isInternal } from './utils';
@@ -26,7 +26,7 @@ type SidebarLayoutProps = {
   renderExtensionAddon?: ExtensionAddonRenderer;
 };
 
-export function APIWithResponsiveSidebarLayout ({
+export const APIWithResponsiveSidebarLayout: React.FC<SidebarLayoutProps> = ({
   serviceNode,
   logo,
   hideTryIt,
@@ -38,7 +38,7 @@ export function APIWithResponsiveSidebarLayout ({
   tryItCredentialsPolicy,
   tryItCorsProxy,
   renderExtensionAddon,
-}:SidebarLayoutProps)  {
+}) => {
   const navigate = useNavigate();
   const container = React.useRef<HTMLDivElement>(null);
   const tree = React.useMemo(
@@ -61,13 +61,13 @@ export function APIWithResponsiveSidebarLayout ({
     const firstSlug = findFirstNodeSlug(tree);
 
     if (firstSlug) {
-      navigate(firstSlug)
+      navigate(firstSlug);
       return <></>;
     }
   }
 
   if (hideInternal && node && isInternal(node)) {
-    navigate("/")
+    navigate('/');
     return <></>;
   }
 

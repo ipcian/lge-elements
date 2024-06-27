@@ -8,7 +8,7 @@ export interface TwoColumnLayoutProps {
   className?: string;
 }
 
-export const TwoColumnLayout:any = React.forwardRef<HTMLDivElement, TwoColumnLayoutProps>(
+export const TwoColumnLayout = React.forwardRef<HTMLDivElement, TwoColumnLayoutProps>(
   ({ header, right, left, className }, ref) => (
     <VStack ref={ref} w="full" className={className} spacing={8}>
       {header}

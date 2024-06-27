@@ -8,7 +8,6 @@ import * as React from 'react';
 import { useSchemaInlineRefResolver } from '../../../context/InlineRefResolver';
 import { useOptionsCtx } from '../../../context/Options';
 import { isNodeExample } from '../../../utils/http-spec/examples';
-import {IndexSignature} from "@stoplight/elements-core/components/Docs/Model";
 
 type ParameterType = 'query' | 'header' | 'path' | 'cookie';
 
@@ -17,7 +16,7 @@ interface ParametersProps {
   parameters?: IHttpParam[];
 }
 
-const readableStyles: IndexSignature = {
+const readableStyles = {
   [HttpParamStyles.PipeDelimited]: 'Pipe separated values',
   [HttpParamStyles.SpaceDelimited]: 'Space separated values',
   [HttpParamStyles.CommaDelimited]: 'Comma separated values',
@@ -34,7 +33,7 @@ const defaultStyle = {
   cookie: HttpParamStyles.Form,
 } as const;
 
-export function Parameters  ({ parameters, parameterType }:ParametersProps)  {
+export const Parameters: React.FunctionComponent<ParametersProps> = ({ parameters, parameterType }) => {
   const { nodeHasChanged, renderExtensionAddon } = useOptionsCtx();
   const [refResolver, maxRefDepth] = useSchemaInlineRefResolver();
 

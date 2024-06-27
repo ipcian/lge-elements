@@ -10,7 +10,7 @@ import { withPersistenceBoundary } from '../../../context/Persistence';
 import { withMosaicProvider } from '../../../hoc/withMosaicProvider';
 import { RequestSamples as RequestSamplesWithoutPersistence } from '../RequestSamples';
 
-const RequestSamples:any = withMosaicProvider(withPersistenceBoundary(RequestSamplesWithoutPersistence));
+const RequestSamples = withMosaicProvider(withPersistenceBoundary(RequestSamplesWithoutPersistence));
 
 const sampleRequest = {
   method: 'POST',

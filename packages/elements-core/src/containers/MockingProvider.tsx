@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-export const MockingContext:any = createNamedContext<{
+export const MockingContext = createNamedContext<{
   mockUrl?: string;
   hideMocking?: boolean;
 }>('MockingContext', { mockUrl: undefined, hideMocking: undefined });

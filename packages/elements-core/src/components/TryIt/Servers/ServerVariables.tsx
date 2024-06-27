@@ -10,7 +10,7 @@ interface ServerVariablesProps<P extends keyof any = string> {
   onChangeValue: (op: 'set' | 'unset', variableName: P, newValue: string) => void;
 }
 
-export function ServerVariables ({ variables, values, onChangeValue }:ServerVariablesProps){
+export const ServerVariables: React.FC<ServerVariablesProps> = ({ variables, values, onChangeValue }) => {
   return (
     <Panel defaultIsOpen data-test="server-vars-try-it">
       <Panel.Titlebar>Server Variables</Panel.Titlebar>

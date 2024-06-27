@@ -1,5 +1,3 @@
-// @ts-nocheck
-
 import {
   DeprecatedBadge,
   Docs,
@@ -47,7 +45,7 @@ const itemMatchesHash = (hash: string, item: OperationNode | WebhookNode) => {
   }
 };
 
-const TryItContext: any = React.createContext<{
+const TryItContext = React.createContext<{
   hideTryIt?: boolean;
   tryItCredentialsPolicy?: TryItCredentialsPolicy;
   corsProxy?: string;
@@ -57,7 +55,7 @@ const TryItContext: any = React.createContext<{
 });
 TryItContext.displayName = 'TryItContext';
 
-const LocationContext: any = React.createContext<{
+const LocationContext = React.createContext<{
   location: Location;
 }>({
   location: {
@@ -70,7 +68,7 @@ const LocationContext: any = React.createContext<{
 });
 LocationContext.displayName = 'LocationContext';
 
-export function APIWithStackedLayout({
+export const APIWithStackedLayout: React.FC<StackedLayoutProps> = ({
   serviceNode,
   hideTryIt,
   hideExport,
@@ -80,7 +78,7 @@ export function APIWithStackedLayout({
   renderExtensionAddon,
   showPoweredByLink = true,
   location,
-}: StackedLayoutProps) {
+}) => {
   const { groups: operationGroups } = computeTagGroups<OperationNode>(serviceNode, NodeType.HttpOperation);
   const { groups: webhookGroups } = computeTagGroups<WebhookNode>(serviceNode, NodeType.HttpWebhook);
 
@@ -113,10 +111,10 @@ export function APIWithStackedLayout({
       </TryItContext.Provider>
     </LocationContext.Provider>
   );
-}
+};
 APIWithStackedLayout.displayName = 'APIWithStackedLayout';
 
-function Group({ group }: { group: TagGroup<OperationNode | WebhookNode> }) {
+const Group = React.memo<{ group: TagGroup<OperationNode | WebhookNode> }>(({ group }) => {
   const [isExpanded, setIsExpanded] = React.useState(false);
   const scrollRef = React.useRef<HTMLDivElement | null>(null);
   const {
@@ -167,11 +165,10 @@ function Group({ group }: { group: TagGroup<OperationNode | WebhookNode> }) {
       </Collapse>
     </Box>
   );
-}
-
+});
 Group.displayName = 'Group';
 
-function Item({ item }: { item: OperationNode | WebhookNode }) {
+const Item = React.memo<{ item: OperationNode | WebhookNode }>(({ item }) => {
   const { location } = React.useContext(LocationContext);
   const { hash } = location;
   const [isExpanded, setIsExpanded] = React.useState(false);
@@ -190,14 +187,6 @@ function Item({ item }: { item: OperationNode | WebhookNode }) {
       }
     }
   }, [hash, item]);
-
-  const ParsedDocsAny = ParsedDocs as any;
-  function Docs() {
-    return <Tab>Docs</Tab>;
-  }
-  function TryIt() {
-    return <Tab>TryIt</Tab>;
-  }
 
   return (
     <Box
@@ -234,12 +223,12 @@ function Item({ item }: { item: OperationNode | WebhookNode }) {
           {item.name}
         </Box>
         {hideTryIt ? (
-          <Box as={ParsedDocsAny} layoutOptions={{ noHeading: true, hideTryItPanel: true }} node={item} p={4} />
+          <Box as={ParsedDocs} layoutOptions={{ noHeading: true, hideTryItPanel: true }} node={item} p={4} />
         ) : (
           <Tabs appearance="line">
             <TabList>
-              <Docs />
-              <TryIt />
+              <Tab>Docs</Tab>
+              <Tab>TryIt</Tab>
             </TabList>
 
             <TabPanels>
@@ -265,14 +254,12 @@ function Item({ item }: { item: OperationNode | WebhookNode }) {
       </Collapse>
     </Box>
   );
-}
-
+});
 Item.displayName = 'Item';
 
-function Collapse({ isOpen, children }: { isOpen: boolean; children: any }) {
+const Collapse: React.FC<{ isOpen: boolean }> = ({ isOpen, children }) => {
   if (!isOpen) return null;
 
   return <Box>{children}</Box>;
-}
-
+};
 Collapse.displayName = 'Collapse';

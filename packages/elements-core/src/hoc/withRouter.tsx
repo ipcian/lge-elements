@@ -1,13 +1,12 @@
-// @ts-nocheck
-
 import { DefaultComponentMapping } from '@stoplight/markdown-viewer';
 import * as React from 'react';
-import { Route, Routes } from 'react-router-dom';
+import { Route } from 'react-router-dom';
 
 import { LinkHeading } from '../components/LinkHeading';
 import { MarkdownComponentsProvider } from '../components/MarkdownViewer/CustomComponents/Provider';
 import { ReactRouterMarkdownLink } from '../components/MarkdownViewer/CustomComponents/ReactRouterLink';
 import { RouterTypeContext } from '../context/RouterType';
+import { useRouter } from '../hooks/useRouter';
 import { RoutingProps } from '../types';
 import { getDisplayName } from './utils';
 
@@ -18,27 +17,22 @@ const components: Partial<DefaultComponentMapping> = {
   h4: ({ color, ...props }) => <LinkHeading size={4} {...props} />,
 };
 
-export function withRouter<P extends RoutingProps>(WrappedComponent: any): React.FC<P> {
+export function withRouter<P extends RoutingProps>(WrappedComponent: React.ComponentType<P>): React.FC<P> {
   const WithRouter = (props: P) => {
-    // const basePath = props.basePath ?? '/';
-    // const staticRouterPath = props.staticRouterPath ?? '';
+    const basePath = props.basePath ?? '/';
+    const staticRouterPath = props.staticRouterPath ?? '';
     const routerType = props.router ?? 'history';
-
-    // const {Router, routerProps}: any = useRouter(routerType, basePath, staticRouterPath);
-
-    function MarkDown() {
-      return (
-        <MarkdownComponentsProvider value={components}>
-          <WrappedComponent {...props} />
-        </MarkdownComponentsProvider>
-      );
-    }
-
+    const { Router, routerProps } = useRouter(routerType, basePath, staticRouterPath);
+    // TESTTEST
     return (
       <RouterTypeContext.Provider value={routerType}>
-        <Routes>
-          <Route path="/*" element={<MarkDown />} />
-        </Routes>
+        <Router {...routerProps} key={basePath}>
+          <Route path="/">
+            <MarkdownComponentsProvider value={components}>
+              <WrappedComponent {...props} />
+            </MarkdownComponentsProvider>
+          </Route>
+        </Router>
       </RouterTypeContext.Provider>
     );
   };

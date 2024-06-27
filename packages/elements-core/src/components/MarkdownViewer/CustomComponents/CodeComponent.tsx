@@ -9,7 +9,6 @@ import URI from 'urijs';
 
 import { NodeTypeColors, NodeTypeIconDefs } from '../../../constants';
 import {
-  InlineRefResolverContext,
   InlineRefResolverProvider,
   useInlineRefResolver,
   useSchemaInlineRefResolver,
@@ -21,12 +20,18 @@ import { JSONSchema } from '../../../types';
 import { isHttpOperation, isJSONSchema } from '../../../utils/guards';
 import { getOriginalObject } from '../../../utils/ref-resolving/resolvedObject';
 import { TryIt } from '../../TryIt';
+import { CustomComponentMapping } from './Provider';
 
 type PartialHttpRequest = Pick<IHttpRequest, 'method' | 'url'> & Partial<IHttpRequest>;
 
 function isPartialHttpRequest(maybeHttpRequest: unknown): maybeHttpRequest is PartialHttpRequest {
-  // @ts-ignore
-  return (isObject(maybeHttpRequest) && 'method' in maybeHttpRequest && typeof maybeHttpRequest['method'] === 'string' && 'url' in maybeHttpRequest && typeof maybeHttpRequest['url'] === 'string');
+  return (
+    isObject(maybeHttpRequest) &&
+    'method' in maybeHttpRequest &&
+    typeof maybeHttpRequest['method'] === 'string' &&
+    'url' in maybeHttpRequest &&
+    typeof maybeHttpRequest['url'] === 'string'
+  );
 }
 
 interface ISchemaAndDescriptionProps {
@@ -62,10 +67,10 @@ const SchemaAndDescription = ({ title: titleProp, schema }: ISchemaAndDescriptio
 
 export { DefaultSMDComponents };
 
-export function CodeComponent  (props:any)  {
+export const CodeComponent: CustomComponentMapping['code'] = props => {
   const { title, jsonSchema, http, resolved, children } = props;
 
-  const resolver = useInlineRefResolver() as InlineRefResolverContext;
+  const resolver = useInlineRefResolver();
 
   const value = resolved || String(Array.isArray(children) ? children[0] : children);
   const parsedValue = useParsedValue(value);

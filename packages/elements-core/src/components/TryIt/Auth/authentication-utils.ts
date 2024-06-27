@@ -94,8 +94,10 @@ export const usePersistedSecuritySchemeWithValues = (): [
   const schemeWithPersistedValue = React.useMemo(() => {
     if (!currentScheme) return undefined;
     return currentScheme.map(scheme => {
-      // @ts-ignore
-      return { scheme: scheme.scheme, authValue: securitySchemeValues[scheme.scheme.key] };
+      return {
+        scheme: scheme.scheme,
+        authValue: securitySchemeValues[scheme.scheme.key],
+      };
     });
   }, [currentScheme, securitySchemeValues]);
 

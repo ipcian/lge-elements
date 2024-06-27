@@ -18,14 +18,17 @@ type ResponsiveSidebarLayoutProps = {
   logo?: string | LogoProps;
   tree?: TableOfContentsItem[];
   onTocClick?(): void;
-  ref?:any
 };
 
 const MAX_CONTENT_WIDTH = 1800;
 const SIDEBAR_MIN_WIDTH = 300;
 const SIDEBAR_MAX_WIDTH = 1.5 * SIDEBAR_MIN_WIDTH;
 
-export function ResponsiveSidebarLayout({ ref,children, name, logo, tree, onTocClick, maxContentWidth = MAX_CONTENT_WIDTH, sidebarWidth = SIDEBAR_MIN_WIDTH }:ResponsiveSidebarLayoutProps){
+export const ResponsiveSidebarLayout = React.forwardRef<HTMLDivElement, ResponsiveSidebarLayoutProps>(
+  (
+    { children, name, logo, tree, onTocClick, maxContentWidth = MAX_CONTENT_WIDTH, sidebarWidth = SIDEBAR_MIN_WIDTH },
+    ref,
+  ) => {
     const scrollRef = React.useRef<HTMLDivElement | null>(null);
     const [sidebarRef, currentSidebarWidth, startResizing] = useResizer(sidebarWidth);
     const { pathname } = useLocation();
@@ -90,7 +93,8 @@ export function ResponsiveSidebarLayout({ ref,children, name, logo, tree, onTocC
         )}
       </Flex>
     );
-  }
+  },
+);
 
 type SidebarRef = React.Ref<HTMLDivElement>;
 type SidebarWidth = number;
@@ -125,7 +129,7 @@ export const Sidebar = ({
         <TableOfContents
           tree={tree}
           activeId={pathname}
-          Link={Link}
+          Link={Link as any}
           onLinkClick={onTocClick}
           isInResponsiveMode={isInResponsiveMode}
         />

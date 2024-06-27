@@ -3,7 +3,7 @@ import * as React from 'react';
 
 import { LogoProps } from '../types';
 
-export function Logo ({ logo }:{ logo: LogoProps }) {
+export const Logo: React.FC<{ logo: LogoProps }> = ({ logo }) => {
   return (
     <Box
       display="inline"

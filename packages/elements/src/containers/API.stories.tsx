@@ -28,7 +28,6 @@ export default {
   },
 };
 
-// @ts-ignore
 const Template: Story<APIProps> = args => <API {...args} />;
 
 export const APIWithYamlProvidedDirectly = Template.bind({});

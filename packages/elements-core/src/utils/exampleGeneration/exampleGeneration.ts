@@ -5,7 +5,6 @@ import { JSONSchema7 } from 'json-schema';
 import React from 'react';
 
 import { useDocument } from '../../context/InlineRefResolver';
-import {IndexSignature} from "@stoplight/elements-core/components/Docs/Model";
 
 type Example = {
   label: string;
@@ -43,7 +42,6 @@ export const generateExampleFromMediaTypeContent = (
 
   try {
     if (textRequestBodyExamples?.length) {
-      // @ts-ignore
       return safeStringify(textRequestBodyExamples?.[chosenExampleIndex]['value'], undefined, 2) ?? '';
     } else if (textRequestBodySchema) {
       const generated = Sampler.sample(textRequestBodySchema, options, document);
@@ -56,7 +54,7 @@ export const generateExampleFromMediaTypeContent = (
   return '';
 };
 
-export const generateExamplesFromJsonSchema = (schema: JSONSchema7 & IndexSignature): Example[] => {
+export const generateExamplesFromJsonSchema = (schema: JSONSchema7): Example[] => {
   const examples: Example[] = [];
 
   if (Array.isArray(schema?.examples)) {

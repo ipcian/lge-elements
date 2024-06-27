@@ -6,9 +6,9 @@ const DEFAULT_CONTEXT: ElementsOptionsContextProps = {};
 
 export type ElementsOptionsContextProps = Pick<DocsProps, 'nodeHasChanged' | 'renderExtensionAddon'>;
 
-export const ElementsOptionsContext:any = React.createContext<ElementsOptionsContextProps>(DEFAULT_CONTEXT);
+export const ElementsOptionsContext = React.createContext<ElementsOptionsContextProps>(DEFAULT_CONTEXT);
 
-export const useOptionsCtx:any = () => {
+export const useOptionsCtx = () => {
   return React.useContext(ElementsOptionsContext) || DEFAULT_CONTEXT;
 };
 

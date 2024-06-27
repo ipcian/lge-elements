@@ -1,8 +1,7 @@
-import { IndexSignature } from '@stoplight/elements-core/components/Docs/Model';
 import { safeStringify } from '@stoplight/json';
 import { isRegularNode, RegularNode, SchemaNode } from '@stoplight/json-schema-tree';
 import type { IHttpParam, INodeExample, INodeExternalExample } from '@stoplight/types';
-import { JSONSchema7, JSONSchema7Type } from 'json-schema';
+import { JSONSchema7, JSONSchema7Definition, JSONSchema7Type } from 'json-schema';
 import { isObject, keyBy, last, map, mapValues } from 'lodash';
 
 export type ParameterSpec = Pick<IHttpParam, 'name' | 'schema' | 'required'> & {
@@ -107,7 +106,7 @@ export const initialParameterValues: (params: readonly ParameterSpec[]) => Recor
 };
 
 export function mapSchemaPropertiesToParameters(
-  properties: { [key: string]: IndexSignature | boolean },
+  properties: { [key: string]: JSONSchema7Definition },
   required: string[] | undefined,
 ) {
   return Object.entries(properties).map(([name, schema]) => ({

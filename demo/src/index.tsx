@@ -8,13 +8,12 @@ import { BrowserRouter } from 'react-router-dom';
 import { App } from './App';
 
 subscribeTheme();
-const REF: any = React.StrictMode
 
 ReactDOM.render(
-    <REF>
-        <BrowserRouter>
-            <App />
-        </BrowserRouter>
-    </REF>,
+  <React.StrictMode>
+    <BrowserRouter>
+      <App />
+    </BrowserRouter>
+  </React.StrictMode>,
   document.getElementById('root'),
 );

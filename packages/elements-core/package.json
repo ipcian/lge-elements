@@ -1,17 +1,17 @@
 {
-  "name": "@lge/elements-core",
-  "version": "1.0.2",
+  "name": "@stoplight/elements-core",
+  "version": "8.3.1",
   "sideEffects": [
     "web-components.min.js",
     "src/web-components/**",
     "**/*.css"
   ],
-  "homepage": "https://github.com/ipcian/lge-elements",
-  "bugs": "https://github.com/ipcian/elements-core",
-  "author": "jsyoon <jsyoon@engistech.com>",
+  "homepage": "https://github.com/stoplightio/elements",
+  "bugs": "https://github.com/stoplightio/elements/issues",
+  "author": "Stoplight <support@stoplight.io>",
   "repository": {
     "type": "git",
-    "url": "https://github.com/ipcian/lge-elements"
+    "url": "https://github.com/stoplightio/elements"
   },
   "license": "Apache-2.0",
   "type": "commonjs",
@@ -79,7 +79,7 @@
     "nanoid": "^3.1.32",
     "prop-types": "^15.7.2",
     "react-query": "^3.34.19",
-    "react-router-dom": "6.23.1",
+    "react-router-dom": "^6.3.3",
     "react-router-hash-link": "^2.1.0",
     "tslib": "^2.1.0",
     "urijs": "^1.19.11",
@@ -102,7 +102,6 @@
     "@types/prop-types": "^15.7.5",
     "@types/react": "16.9.56",
     "@types/react-dom": "16.9.12",
-    "@types/react-router-dom": "^5.3.3",
     "@types/react-router-hash-link": "^1.2.1",
     "@types/urijs": "^1.19.19",
     "enzyme": "3.x.x",
@@ -121,6 +120,5 @@
   },
   "release": {
     "extends": "@stoplight/scripts/release"
-  },
-  "gitHead": "f0db5dc6283f86e642c17dfcc8cf85c5719a89bb"
+  }
 }

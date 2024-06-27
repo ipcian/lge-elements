@@ -17,7 +17,7 @@ import { InstagramAPI } from '../__fixtures__/api-descriptions/Instagram';
 import { simpleApiWithoutDescription } from '../__fixtures__/api-descriptions/simpleApiWithoutDescription';
 import { API, APIImpl } from './API';
 
-export const APIWithoutRouter: any = flow(
+export const APIWithoutRouter = flow(
   withStyles,
   withPersistenceBoundary,
   withMosaicProvider,
@@ -70,8 +70,13 @@ describe('API', () => {
     const history = createMemoryHistory();
     history.push('/paths/internal-operation/get');
 
-    // @ts-ignore
-    const { unmount } = render(<Router history={history}><Route path="/"><APIWithoutRouter layout="sidebar" apiDescriptionDocument={APIDocument} /></Route></Router>,);
+    const { unmount } = render(
+      <Router history={history}>
+        <Route path="/">
+          <APIWithoutRouter layout="sidebar" apiDescriptionDocument={APIDocument} />
+        </Route>
+      </Router>,
+    );
 
     expect(screen.getByText('If you see this, something went wrong')).toBeInTheDocument();
 
@@ -82,8 +87,13 @@ describe('API', () => {
     const history = createMemoryHistory();
     history.push('/schemas/InternalObject');
 
-    // @ts-ignore
-    render(<Router history={history}><Route path="/"><APIWithoutRouter layout="sidebar" apiDescriptionDocument={APIDocument} /></Route></Router>,);
+    render(
+      <Router history={history}>
+        <Route path="/">
+          <APIWithoutRouter layout="sidebar" apiDescriptionDocument={APIDocument} />
+        </Route>
+      </Router>,
+    );
 
     expect(screen.getByText('Cool object, but internal.')).toBeInTheDocument();
   });
@@ -92,8 +102,13 @@ describe('API', () => {
     const history = createMemoryHistory();
     history.push('/paths/internal-operation/get');
 
-    // @ts-ignore
-    render(<Router history={history}><Route path="/"><APIWithoutRouter layout="sidebar" apiDescriptionDocument={APIDocument} hideInternal /></Route></Router>,);
+    render(
+      <Router history={history}>
+        <Route path="/">
+          <APIWithoutRouter layout="sidebar" apiDescriptionDocument={APIDocument} hideInternal />
+        </Route>
+      </Router>,
+    );
 
     expect(screen.queryByText('If you see this, something went wrong')).not.toBeInTheDocument();
     expect(history.location.pathname).toBe('/');
@@ -103,8 +118,13 @@ describe('API', () => {
     const history = createMemoryHistory();
     history.push('/schemas/InternalObject');
 
-    // @ts-ignore
-    render(<Router history={history}><Route path="/"><APIWithoutRouter layout="sidebar" apiDescriptionDocument={APIDocument} hideInternal /></Route></Router>,);
+    render(
+      <Router history={history}>
+        <Route path="/">
+          <APIWithoutRouter layout="sidebar" apiDescriptionDocument={APIDocument} hideInternal />
+        </Route>
+      </Router>,
+    );
 
     expect(screen.queryByText('Cool object, but internal.')).not.toBeInTheDocument();
     expect(history.location.pathname).toBe('/');

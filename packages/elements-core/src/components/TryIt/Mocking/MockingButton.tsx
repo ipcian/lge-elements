@@ -11,11 +11,11 @@ interface MockingButtonProps {
   onOptionsChange: (data: MockingOptions) => void;
 }
 
-export function MockingButton  ({
+export const MockingButton: React.FC<MockingButtonProps> = ({
   operation,
   options: { code, example, dynamic },
   onOptionsChange,
-}:MockingButtonProps)  {
+}) => {
   const operationResponses = operation.responses;
 
   const setMockingOptions = React.useCallback(

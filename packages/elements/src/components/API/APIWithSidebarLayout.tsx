@@ -12,7 +12,7 @@ import { ExtensionAddonRenderer } from '@stoplight/elements-core/components/Docs
 import { Flex, Heading } from '@stoplight/mosaic';
 import { NodeType } from '@stoplight/types';
 import * as React from 'react';
-import {Link, useLocation, useNavigate} from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 
 import { ServiceNode } from '../../utils/oas/types';
 import { computeAPITree, findFirstNodeSlug, isInternal } from './utils';
@@ -30,7 +30,7 @@ type SidebarLayoutProps = {
   renderExtensionAddon?: ExtensionAddonRenderer;
 };
 
-export function APIWithSidebarLayout ({
+export const APIWithSidebarLayout: React.FC<SidebarLayoutProps> = ({
   serviceNode,
   logo,
   hideTryIt,
@@ -41,7 +41,7 @@ export function APIWithSidebarLayout ({
   tryItCredentialsPolicy,
   tryItCorsProxy,
   renderExtensionAddon,
-}:SidebarLayoutProps) {
+}) => {
   const navigate = useNavigate();
   const container = React.useRef<HTMLDivElement>(null);
   const tree = React.useMemo(
@@ -63,18 +63,22 @@ export function APIWithSidebarLayout ({
     const firstSlug = findFirstNodeSlug(tree);
 
     if (firstSlug) {
-      navigate(firstSlug)
+      navigate(firstSlug);
       return <></>;
     }
   }
 
   if (hideInternal && node && isInternal(node)) {
-    navigate("/")
+    navigate('/');
     return <></>;
   }
 
+  const sidebar = (
+    <Sidebar serviceNode={serviceNode} logo={logo} container={container} pathname={pathname} tree={tree} />
+  );
+
   return (
-    <SidebarLayout ref={container} sidebar={<Sidebar serviceNode={serviceNode} logo={logo} container={container} pathname={pathname} tree={tree} />}>
+    <SidebarLayout ref={container} sidebar={sidebar}>
       {node && (
         <ElementsOptionsProvider renderExtensionAddon={renderExtensionAddon}>
           <ParsedDocs
@@ -103,7 +107,7 @@ type SidebarProps = {
   tree: TableOfContentsItem[];
 };
 
-export function Sidebar ({ serviceNode, logo, container, pathname, tree }:SidebarProps):JSX.Element {
+export const Sidebar: React.FC<SidebarProps> = ({ serviceNode, logo, container, pathname, tree }) => {
   const handleTocClick = () => {
     if (container.current) {
       container.current.scrollIntoView();
@@ -121,7 +125,7 @@ export function Sidebar ({ serviceNode, logo, container, pathname, tree }:Sideba
         <Heading size={4}>{serviceNode.name}</Heading>
       </Flex>
       <Flex flexGrow flexShrink overflowY="auto" direction="col">
-        <TableOfContents tree={tree} activeId={pathname} Link={Link} onLinkClick={handleTocClick} />
+        <TableOfContents tree={tree} activeId={pathname} Link={Link as any} onLinkClick={handleTocClick} />
       </Flex>
       <PoweredByLink source={serviceNode.name} pathname={pathname} packageType="elements" />
     </>

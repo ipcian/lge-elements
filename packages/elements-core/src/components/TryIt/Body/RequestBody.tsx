@@ -10,7 +10,7 @@ interface RequestBodyProps {
   onChange: (newRequestBody: string) => void;
 }
 
-export function RequestBody ({ examples, requestBody, onChange }:RequestBodyProps) {
+export const RequestBody: React.FC<RequestBodyProps> = ({ examples, requestBody, onChange }) => {
   return (
     <Panel defaultIsOpen>
       <Panel.Titlebar

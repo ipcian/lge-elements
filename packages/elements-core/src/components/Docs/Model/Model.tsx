@@ -1,4 +1,3 @@
-import { TwoColumnLayoutCustom } from '@stoplight/elements-core/components/Docs/TwoColumnLayoutCustom';
 import { JsonSchemaViewer } from '@stoplight/json-schema-viewer';
 import { Box, CopyButton, Flex, Heading, HStack, NodeAnnotation, Panel, Select, Text, VStack } from '@stoplight/mosaic';
 import { CodeViewer } from '@stoplight/mosaic-code-viewer';
@@ -18,9 +17,9 @@ import { DocsComponentProps } from '..';
 import { DeprecatedBadge, InternalBadge } from '../HttpOperation/Badges';
 import { ExportButton } from '../HttpService/ExportButton';
 import { NodeVendorExtensions } from '../NodeVendorExtensions';
+import { TwoColumnLayout } from '../TwoColumnLayout';
 
 export type ModelProps = DocsComponentProps<JSONSchema7>;
-export type IndexSignature = { [type: string | number | symbol]: any };
 
 const ModelComponent: React.FC<ModelProps> = ({
   data: unresolvedData,
@@ -30,7 +29,7 @@ const ModelComponent: React.FC<ModelProps> = ({
   exportProps,
 }) => {
   const [resolveRef, maxRefDepth] = useSchemaInlineRefResolver();
-  const data = useResolvedObject(unresolvedData) as JSONSchema7 & IndexSignature;
+  const data = useResolvedObject(unresolvedData) as JSONSchema7;
   const { nodeHasChanged, renderExtensionAddon } = useOptionsCtx();
 
   const { ref: layoutRef, isCompact } = useIsCompact(layoutOptions);
@@ -95,7 +94,7 @@ const ModelComponent: React.FC<ModelProps> = ({
   );
 
   return (
-    <TwoColumnLayoutCustom
+    <TwoColumnLayout
       ref={layoutRef}
       className={cn('Model', className)}
       header={header}
@@ -105,59 +104,57 @@ const ModelComponent: React.FC<ModelProps> = ({
   );
 };
 
-const ModelExamples: any = React.memo(
-  ({ data, isCollapsible = false }: { data: JSONSchema7; isCollapsible?: boolean }) => {
-    const [chosenExampleIndex, setChosenExampleIndex] = React.useState(0);
-    const [show, setShow] = React.useState<boolean>(false);
-    const [loading, setLoading] = React.useState<boolean>(false);
+const ModelExamples = React.memo(({ data, isCollapsible = false }: { data: JSONSchema7; isCollapsible?: boolean }) => {
+  const [chosenExampleIndex, setChosenExampleIndex] = React.useState(0);
+  const [show, setShow] = React.useState<boolean>(false);
+  const [loading, setLoading] = React.useState<boolean>(false);
 
-    const examples = React.useMemo(() => generateExamplesFromJsonSchema(data), [data]);
+  const examples = React.useMemo(() => generateExamplesFromJsonSchema(data), [data]);
 
-    const selectedExample = examples[chosenExampleIndex]?.data;
+  const selectedExample = examples[chosenExampleIndex]?.data;
 
-    const handleLoadMorePress = React.useCallback(() => {
-      setLoading(true);
-      setTimeout(() => setShow(true), 50);
-    }, []);
+  const handleLoadMorePress = React.useCallback(() => {
+    setLoading(true);
+    setTimeout(() => setShow(true), 50);
+  }, []);
 
-    const examplesSelect = examples.length > 1 && (
-      <Select
-        aria-label="Example"
-        value={String(chosenExampleIndex)}
-        options={examples.map(({ label }, index) => ({ value: index, label }))}
-        onChange={value => setChosenExampleIndex(parseInt(String(value), 10))}
-        size="sm"
-        triggerTextPrefix="Example: "
-      />
-    );
+  const examplesSelect = examples.length > 1 && (
+    <Select
+      aria-label="Example"
+      value={String(chosenExampleIndex)}
+      options={examples.map(({ label }, index) => ({ value: index, label }))}
+      onChange={value => setChosenExampleIndex(parseInt(String(value), 10))}
+      size="sm"
+      triggerTextPrefix="Example: "
+    />
+  );
 
-    return (
-      <Panel rounded isCollapsible={isCollapsible} defaultIsOpen={!isCollapsible}>
-        <Panel.Titlebar rightComponent={selectedExample ? <CopyButton size="sm" copyValue={selectedExample} /> : null}>
-          {examplesSelect || (
-            <Text color="body" role="heading">
-              Example
-            </Text>
-          )}
-        </Panel.Titlebar>
+  return (
+    <Panel rounded isCollapsible={isCollapsible} defaultIsOpen={!isCollapsible}>
+      <Panel.Titlebar rightComponent={selectedExample ? <CopyButton size="sm" copyValue={selectedExample} /> : null}>
+        {examplesSelect || (
+          <Text color="body" role="heading">
+            Example
+          </Text>
+        )}
+      </Panel.Titlebar>
 
-        <Panel.Content p={0}>
-          {show || !exceedsSize(selectedExample) ? (
-            <CodeViewer
-              aria-label={selectedExample}
-              noCopyButton
-              maxHeight="500px"
-              language="json"
-              value={selectedExample}
-              showLineNumbers
-            />
-          ) : (
-            <LoadMore loading={loading} onClick={handleLoadMorePress} />
-          )}
-        </Panel.Content>
-      </Panel>
-    );
-  },
-);
+      <Panel.Content p={0}>
+        {show || !exceedsSize(selectedExample) ? (
+          <CodeViewer
+            aria-label={selectedExample}
+            noCopyButton
+            maxHeight="500px"
+            language="json"
+            value={selectedExample}
+            showLineNumbers
+          />
+        ) : (
+          <LoadMore loading={loading} onClick={handleLoadMorePress} />
+        )}
+      </Panel.Content>
+    </Panel>
+  );
+});
 
-export const Model: any = withErrorBoundary<ModelProps>(ModelComponent, { recoverableProps: ['data'] });
+export const Model = withErrorBoundary<ModelProps>(ModelComponent, { recoverableProps: ['data'] });

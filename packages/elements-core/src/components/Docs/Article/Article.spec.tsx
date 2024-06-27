@@ -9,9 +9,9 @@ import { withRouter } from '../../../hoc/withRouter';
 import type { RoutingProps } from '../../../types';
 import { Article as _Article } from './index';
 
-const Article: any = withMosaicProvider(withPersistenceBoundary(_Article));
+const Article = withMosaicProvider(withPersistenceBoundary(_Article));
 
-const ArticleWithRouter: any = flow(
+const ArticleWithRouter = flow(
   withRouter,
   withPersistenceBoundary,
   withMosaicProvider,

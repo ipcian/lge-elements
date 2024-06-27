@@ -13,7 +13,6 @@ import {
 } from './Auth/authentication-utils';
 import { BodyParameterValues, createRequestBody } from './Body/request-body-utils';
 import { MockData } from './Mocking/mocking-utils';
-import {IndexSignature} from "@stoplight/elements-core/components/Docs/Model";
 
 type NameAndValue = {
   name: string;
@@ -53,7 +52,7 @@ const getServerUrl = ({
   return serverUrl;
 };
 
-const delimiter: IndexSignature = {
+const delimiter = {
   [HttpParamStyles.Form]: ',',
   [HttpParamStyles.SpaceDelimited]: ' ',
   [HttpParamStyles.PipeDelimited]: '|',

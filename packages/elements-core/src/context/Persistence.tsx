@@ -1,5 +1,3 @@
-
-
 import { Provider as JotaiProvider } from 'jotai';
 import * as React from 'react';
 
@@ -13,7 +11,7 @@ export const PersistenceContextProvider = JotaiProvider;
 /**
  * HOC that Wraps `WrappedComponent` in a `PersistenceContextProvider`.
  */
-export function withPersistenceBoundary<T>(WrappedComponent: any) {
+export function withPersistenceBoundary<T>(WrappedComponent: React.ComponentType<T>) {
   const WithPersistenceBoundary: React.FC<T> = props => {
     return (
       <PersistenceContextProvider>

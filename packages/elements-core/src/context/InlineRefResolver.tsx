@@ -9,33 +9,32 @@ import { createResolvedObject } from '../utils/ref-resolving/resolvedObject';
 
 const translatedObjectSymbol = Symbol('TranslatedObject');
 
-export type InlineRefResolverContext = {
+type InlineRefResolverContext = {
   resolver: ReferenceResolver | undefined;
   maxRefDepth: number | undefined;
 };
 
-const InlineRefResolverContext:any  = React.createContext<InlineRefResolverContext>({resolver: undefined, maxRefDepth:undefined});
+const InlineRefResolverContext = React.createContext<InlineRefResolverContext | undefined>(undefined);
 InlineRefResolverContext.displayName = 'InlineRefResolverContext';
 
-const DocumentContext:any = React.createContext<object | undefined>(undefined);
+const DocumentContext = React.createContext<object | undefined>(undefined);
 DocumentContext.displayName = 'DocumentContext';
 
 type InlineRefResolverProviderProps = {
   document?: unknown;
   resolver?: ReferenceResolver;
   maxRefDepth?: number;
-  children?: any
 };
 
 /**
  * Populates `InlineRefResolverContext` with either a standard inline ref resolver based on `document`, or a custom resolver function provided by the caller.
  */
-export function InlineRefResolverProvider({
+export const InlineRefResolverProvider: React.FC<InlineRefResolverProviderProps> = ({
   children,
   document: maybeDocument,
   resolver,
   maxRefDepth,
-}:InlineRefResolverProviderProps) {
+}) => {
   const document = isPlainObject(maybeDocument) ? maybeDocument : undefined;
 
   const computedResolver = React.useMemo(
@@ -56,7 +55,7 @@ export const useDocument = () => useContext(DocumentContext);
 
 export const useResolvedObject = (currentObject: object): object => {
   const document = useDocument();
-  const { resolver } = useInlineRefResolver() ?? {} as any;
+  const { resolver } = useInlineRefResolver() ?? {};
 
   return React.useMemo(
     () => createResolvedObject(currentObject, { contextObject: document as object, resolver }),
@@ -66,7 +65,7 @@ export const useResolvedObject = (currentObject: object): object => {
 
 export const useSchemaInlineRefResolver = (): [ReferenceResolver, number | undefined] => {
   const document = useDocument();
-  const { resolver, maxRefDepth } = useInlineRefResolver() ?? {} as any;
+  const { resolver, maxRefDepth } = useInlineRefResolver() ?? {};
 
   const referenceResolver = React.useCallback<ReferenceResolver>(
     (...args) => {

@@ -1,5 +1,3 @@
-// @ts-nocheck
-
 import { Box } from '@stoplight/mosaic';
 import * as PropTypes from 'prop-types';
 import * as React from 'react';
@@ -29,7 +27,7 @@ export class Styled extends React.Component {
   }
 }
 
-export function withStyles<T>(Component: React.ComponentType<T> & any): React.FC<T> {
+export function withStyles<T>(Component: React.ComponentType<T>): React.FC<T> {
   const Inner: React.FC<T> = props => {
     return (
       <Styled>

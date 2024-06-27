@@ -88,7 +88,7 @@ export interface CommonAPIProps extends RoutingProps {
 
   /**
    * Url of a CORS proxy that will be used to send requests in TryIt.
-   * Provided url will be prepended to a URL of an actual request.
+   * Provided url will be prepended to an URL of an actual request.
    * @default false
    */
   tryItCorsProxy?: string;
@@ -109,7 +109,7 @@ const propsAreWithDocument = (props: APIProps): props is APIPropsWithDocument =>
   return props.hasOwnProperty('apiDescriptionDocument');
 };
 
-export function APIImpl(props:APIProps) {
+export const APIImpl: React.FC<APIProps> = props => {
   const {
     layout = 'sidebar',
     apiDescriptionUrl = '',
@@ -143,18 +143,6 @@ export function APIImpl(props:APIProps) {
 
   const document = apiDescriptionDocument || fetchedDocument || '';
   const parsedDocument = useParsedValue(document);
-  // console.log(parsedDocument, { baseUrl: apiDescriptionUrl });
-  // if(parsedDocument) {
-  //   return (
-  //       <Flex justify="center" alignItems="center" w="full" minH="screen">
-  //         <NonIdealState
-  //             title="Document could not be loaded"
-  //             description="The API description document could not be fetched. This could indicate connectivity problems, or issues with the server hosting the spec."
-  //             icon="exclamation-triangle"
-  //         />
-  //       </Flex>
-  //   )
-  // }
   const bundledDocument = useBundleRefsIntoDocument(parsedDocument, { baseUrl: apiDescriptionUrl });
   const serviceNode = React.useMemo(() => transformOasToServiceNode(bundledDocument), [bundledDocument]);
   const exportProps = useExportDocumentProps({ originalDocument: document, bundledDocument });
@@ -235,9 +223,9 @@ export function APIImpl(props:APIProps) {
       )}
     </InlineRefResolverProvider>
   );
-}
+};
 
-export const API: any = flow(
+export const API = flow(
   withRouter,
   withStyles,
   withPersistenceBoundary,
