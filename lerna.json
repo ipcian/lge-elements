@@ -9,7 +9,7 @@
   },
   "publicConfig": {
     "access": "public",
-    "registry" : "https://www.npmjs.com/",
+    "registry" : "https://github.com/ipcian/lge-elements/tree/test",
     "directory" : "dist"
   }
 }
