@@ -6,5 +6,10 @@
     "publish": {
       "message": "chore(release): publish"
     }
+  },
+  "publicConfig": {
+    "access": "public",
+    "registry" : "https://www.npmjs.com/",
+    "directory" : "dist"
   }
 }
